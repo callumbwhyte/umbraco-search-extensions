@@ -14,9 +14,12 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
         protected override void AddSingleValue(Document doc, object value)
         {
-            if (value is Udi udi)
+            if (value is string valueString)
             {
-                doc.Add(new Field(FieldName, udi.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                if (Udi.TryParse(valueString, out Udi udi) == true)
+                {
+                    doc.Add(new Field(FieldName, udi.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                }
             }
         }
     }
