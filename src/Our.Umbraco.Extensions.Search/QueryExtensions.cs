@@ -8,7 +8,7 @@ namespace Our.Umbraco.Extensions.Search
         /// Query documents with the specified template ID assigned
         /// </summary>
         /// <remarks>
-        /// If no <paramref name="templateId" /> is given, queries for documents without a template ID assigned
+        /// If no <paramref name="templateId"/> is given, queries for documents without a template ID assigned
         /// </remarks>
         public static IBooleanOperation HasTemplate(this IQuery query, int templateId = 0)
         {
