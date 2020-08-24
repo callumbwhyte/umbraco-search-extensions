@@ -30,6 +30,8 @@ namespace Our.Umbraco.Extensions.Search.Startup
 
                 valueTypeFactories.AddOrUpdate("list", new DelegateFieldValueTypeFactory(x => new ListValueType(x)));
 
+                valueTypeFactories.AddOrUpdate("udi", new DelegateFieldValueTypeFactory(x => new UdiValueType(x)));
+
                 fieldDefinitions.AddOrUpdate(new FieldDefinition("path", "list"));
             }
         }
