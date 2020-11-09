@@ -12,12 +12,7 @@ namespace Our.Umbraco.Extensions.Search
         /// </remarks>
         public static IBooleanOperation HasTemplate(this IQuery query, int templateId = 0)
         {
-            if (templateId > 0)
-            {
-                return query.Field("templateID", templateId);
-            }
-
-            return query.GroupedNot(new[] { "templateID" }, "0");
+            return query.Field("templateID", templateId.ToString());
         }
 
         /// <summary>
