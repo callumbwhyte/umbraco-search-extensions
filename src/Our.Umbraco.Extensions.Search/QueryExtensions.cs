@@ -31,7 +31,7 @@ namespace Our.Umbraco.Extensions.Search
         /// </remarks>
         public static IBooleanOperation IsVisble(this IQuery query)
         {
-            return query.GroupedNot(new[] { "umbracoNaviHide" }, "1");
+            return query.Field("umbracoNaviHide", "0");
         }
     }
 }
