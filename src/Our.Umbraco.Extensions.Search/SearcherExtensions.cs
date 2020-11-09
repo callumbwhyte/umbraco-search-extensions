@@ -14,9 +14,9 @@ namespace Our.Umbraco.Extensions.Search
                 .CreateQuery(category, defaultOperation)
                 .IsPublished();
 
-            query.And().IsVisble();
+            query.AndNot(x => x.IsVisble());
 
-            query.And().HasTemplate();
+            query.AndNot(x => x.HasTemplate());
 
             return query;
         }
