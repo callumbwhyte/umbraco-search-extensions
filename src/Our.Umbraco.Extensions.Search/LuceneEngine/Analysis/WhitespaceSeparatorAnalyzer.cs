@@ -5,12 +5,12 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.Analysis
 {
     public class WhitespaceSeparatorAnalyzer : Analyzer
     {
-        public WhitespaceSeparatorAnalyzer(string separator)
+        public WhitespaceSeparatorAnalyzer(char separator)
         {
             Separator = separator;
         }
 
-        public string Separator { get; }
+        public char Separator { get; }
 
         public override TokenStream TokenStream(string fieldName, TextReader reader)
         {

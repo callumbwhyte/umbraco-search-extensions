@@ -5,13 +5,13 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.Analysis
 {
     public class WhitespaceSeparatorTokenizer : WhitespaceTokenizer
     {
-        public WhitespaceSeparatorTokenizer(TextReader @in, string separator)
+        public WhitespaceSeparatorTokenizer(TextReader @in, char separator)
             : base(@in)
         {
             Separator = separator;
         }
 
-        public string Separator { get; }
+        public char Separator { get; }
 
         protected override bool IsTokenChar(char c)
         {
