@@ -47,6 +47,14 @@ namespace Our.Umbraco.Extensions.Search
         #region Cultures
 
         /// <summary>
+        /// Query documents with the specified name and culture
+        /// </summary>
+        public static IBooleanOperation NodeName(this IQuery query, string nodeName, string culture)
+        {
+            return query.Field("nodeName", culture, nodeName);
+        }
+
+        /// <summary>
         /// Query documents with the specified field and culture
         /// </summary>
         public static IBooleanOperation Field<T>(this IQuery query, string fieldName, string fieldCulture, T fieldValue)
