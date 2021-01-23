@@ -3,6 +3,8 @@
 <img src="docs/img/logo.png?raw=true" alt="Umbraco Search Extensions" width="250" align="right" />
 
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Extensions.Search.svg)](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/)
+[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/search-extensions/)
+
 
 ## Getting started
 
@@ -48,7 +50,7 @@ Finally, it is possible to query for content that has **any** one of the specifi
 query.And().NodeTypeAlias(string[] aliases)
 ```
 
-#### Cultures
+### Cultures
 
 Umbraco properties that have been set to "vary by culture" are indexed with a specific alias: `{culture}_{fieldName}`. For example, if the "pageTitle" field varies by culture and has 2 languages, English and Spanish, the index would contain 2 fields: `en_pageTitle` and `es_pageTitle`.
 
