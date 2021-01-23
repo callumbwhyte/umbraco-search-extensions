@@ -36,10 +36,34 @@ Similarly, querying all content where the `umbracoNaviHide` property is **not** 
 query.And().IsVisible()
 ```
 
-Finally, an example of querying content with a specific template ID can seen below. If `0` or no value is passed to the method, the query will match content with **any** templatee ID set.
+It is possible to query content with a specific template ID set. If `0` or no value is passed to the method, the query will match content with **any** templatee ID set.
 
 ```
 query.And().HasTemplate(int templateId)
+```
+
+Finally, it is possible to query for content that has **any** one of the specified content type aliases. Out of the box Umbraco supports querying for a single content alias.
+
+```
+query.And().NodeTypeAlias(string[] aliases)
+```
+
+#### Cultures
+
+Umbraco properties that have been set to "vary by culture" are indexed with a specific alias: `{culture}_{fieldName}`. For example, if the "pageTitle" field varies by culture and has 2 languages, English and Spanish, the index would contain 2 fields: `en_pageTitle` and `es_pageTitle`.
+
+A culture can be passed to `Field` and `NodeName` queries like this:
+
+```
+query.And().Field(string field, string culture)
+
+query.And().NodeName(string nodeName, string culture)
+```
+
+It even works with grouped queries such as `GroupedAnd`, `GroupedOr`, and `GroupedNot`, where multiple fields can be specified:
+
+```
+query.And().GroupedOr(string[] fields, string culture)
 ```
 
 ### Searching
@@ -94,12 +118,12 @@ if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
 }
 ```
 
-The `picker` field type adds an additional field to the index containing search-friendly aliases for the picked values, prefixed with `__Search_`.
+The `picker` field type adds search-friendly aliases for the picked items into the index.
 
 A picker with a selected a content item called "Example Page" can be queried like this:
 
 ```
-query.Field("__Search_somePicker", "example-page");
+query.Field("somePicker", "example-page");
 ```
 
 Umbraco's "path" field is automatically indexed as a list and so a content item with the path `-1,1050,1100` can be queried like this:
