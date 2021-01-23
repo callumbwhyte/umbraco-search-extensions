@@ -1,4 +1,6 @@
-﻿using Examine.Search;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Examine.Search;
 
 namespace Our.Umbraco.Extensions.Search
 {
@@ -41,5 +43,111 @@ namespace Our.Umbraco.Extensions.Search
         {
             return query.GroupedOr(new[] { "__NodeTypeAlias" }, aliases);
         }
+
+
+        #region Cultures
+
+        /// <summary>
+        /// Query documents with the specified field and culture
+        /// </summary>
+        public static INestedBooleanOperation Field<T>(this INestedQuery query, string fieldName, string fieldCulture, T fieldValue)
+            where T : struct
+        {
+            var cultureField = GetFieldName(fieldName, fieldCulture);
+
+            return query.Field<T>(cultureField, fieldValue);
+        }
+
+        /// <summary>
+        /// Query documents with the specified field and culture
+        /// </summary>
+        public static INestedBooleanOperation Field(this INestedQuery query, string fieldName, string fieldCulture, string fieldValue)
+        {
+            var cultureField = GetFieldName(fieldName, fieldCulture);
+
+            return query.Field(cultureField, fieldValue);
+        }
+
+        /// <summary>
+        /// Query documents with the specified field and culture
+        /// </summary>
+        public static INestedBooleanOperation Field(this INestedQuery query, string fieldName, string fieldCulture, IExamineValue fieldValue)
+        {
+            var cultureField = GetFieldName(fieldName, fieldCulture);
+
+            return query.Field(cultureField, fieldValue);
+        }
+
+        /// <summary>
+        /// Query documents with all of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedAnd(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params string[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedAnd(culturedFields, fieldValues);
+        }
+
+        /// <summary>
+        /// Query documents with all of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedAnd(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params IExamineValue[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedAnd(culturedFields, fieldValues);
+        }
+
+        /// <summary>
+        /// Query documents with any of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedOr(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params string[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedOr(culturedFields, fieldValues);
+        }
+
+        /// <summary>
+        /// Query documents with any of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedOr(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params IExamineValue[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedOr(culturedFields, fieldValues);
+        }
+
+        /// <summary>
+        /// Query documents without any of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedNot(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params string[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedNot(culturedFields, fieldValues);
+        }
+
+        /// <summary>
+        /// Query documents without any of the specified fields and culture
+        /// </summary>
+        public static INestedBooleanOperation GroupedNot(this INestedQuery query, IEnumerable<string> fields, string fieldCulture, params IExamineValue[] fieldValues)
+        {
+            var culturedFields = fields.Select(x => GetFieldName(x, fieldCulture));
+
+            return query.GroupedNot(culturedFields, fieldValues);
+        }
+
+        private static string GetFieldName(string fieldName, string culture)
+        {
+            if (string.IsNullOrWhiteSpace(culture) == false)
+            {
+                return fieldName + "_" + culture.ToLower();
+            }
+
+            return fieldName;
+        }
+
+        #endregion
     }
 }
