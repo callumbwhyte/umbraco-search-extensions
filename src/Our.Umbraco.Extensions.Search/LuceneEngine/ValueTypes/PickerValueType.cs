@@ -1,4 +1,5 @@
-﻿using Lucene.Net.Documents;
+﻿using System;
+using Lucene.Net.Documents;
 using Our.Umbraco.Extensions.Search.Helpers;
 using Umbraco.Core;
 using Umbraco.Core.Composing;
@@ -9,14 +10,10 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
     {
         private readonly PublishedContentHelper _publishedContentHelper;
 
-        private readonly string _aliasPrefix;
-
-        public PickerValueType(string fieldName, string aliasPrefix = Constants.SearchPrefix)
-            : base(fieldName)
+        public PickerValueType(string fieldName)
+            : base(fieldName, ',')
         {
             _publishedContentHelper = Current.Factory.GetInstance<PublishedContentHelper>();
-
-            _aliasPrefix = aliasPrefix;
         }
 
         protected override void AddSingleValue(Document doc, object value)
@@ -25,20 +22,17 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
             if (value is string valueString)
             {
-                var ids = valueString.Split(',');
+                var ids = valueString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var id in ids)
                 {
-                    if (Udi.TryParse(id, out Udi udi) == true)
-                    {
-                        var content = _publishedContentHelper.GetByUdi(udi);
+                    var content = _publishedContentHelper.GetByString(id);
 
-                        if (content != null)
+                    if (content != null)
+                    {
+                        if (content.UrlSegment != null)
                         {
-                            if (content.UrlSegment != null)
-                            {
-                                doc.Add(new Field(_aliasPrefix + FieldName, content.UrlSegment, Field.Store.YES, Field.Index.ANALYZED));
-                            }
+                            doc.Add(new Field(FieldName, content.UrlSegment, Field.Store.YES, Field.Index.NOT_ANALYZED));
                         }
                     }
                 }
