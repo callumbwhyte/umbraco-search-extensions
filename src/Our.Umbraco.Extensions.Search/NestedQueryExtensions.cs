@@ -33,5 +33,13 @@ namespace Our.Umbraco.Extensions.Search
         {
             return query.Field("umbracoNaviHide", "0");
         }
+
+        /// <summary>
+        /// Query documents with any of the specified node type aliases
+        /// </summary>
+        public static INestedBooleanOperation NodeTypeAlias(this INestedQuery query, string[] aliases)
+        {
+            return query.GroupedOr(new[] { "__NodeTypeAlias" }, aliases);
+        }
     }
 }
