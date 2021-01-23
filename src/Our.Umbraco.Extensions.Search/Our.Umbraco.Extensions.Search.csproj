@@ -5,7 +5,7 @@
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>Extensions for performing searches in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
-    <Copyright>Copyright © 2020 Callum Whyte, and other contributors</Copyright>
+    <Copyright>Copyright © 2021 Callum Whyte, and other contributors</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/umbraco-search-extensions/main/docs/img/logo.png</PackageIconUrl>
     <PackageLicenseUrl>https://github.com/callumbwhyte/umbraco-search-extensions/blob/main/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/callumbwhyte/umbraco-search-extensions</PackageProjectUrl>

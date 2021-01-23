@@ -146,6 +146,6 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 
 ## License
 
-Copyright &copy; 2020 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2021 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).
