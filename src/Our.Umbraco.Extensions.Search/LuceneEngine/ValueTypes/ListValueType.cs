@@ -5,8 +5,8 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 {
     public class ListValueType : FullTextType
     {
-        public ListValueType(string fieldName)
-            : base(fieldName, new WhitespaceSeparatorAnalyzer(','))
+        public ListValueType(string fieldName, char separator = ',')
+            : base(fieldName, new WhitespaceSeparatorAnalyzer(separator))
         {
 
         }
