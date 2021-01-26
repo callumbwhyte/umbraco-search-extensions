@@ -134,6 +134,8 @@ Umbraco's "path" field is automatically indexed as a list and so a content item 
 query.Field("path", "1100");
 ```
 
+By default Umbraco indexes the `createDate` and `updateDate` fields as strings. This package overwrites the index to change it as long.
+
 ## Contribution guidelines
 
 To raise a new bug, create an issue on the GitHub repository. To fix a bug or add new features, fork the repository and send a pull request with your changes. Feel free to add ideas to the repository's issues list if you would to discuss anything related to the library.
