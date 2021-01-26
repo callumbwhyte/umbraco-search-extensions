@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2021-01-26
+### Added
+* Indexing `createDate` and `updateDate` fields as dates
+
 ## [1.1.0] - 2021-01-23
 ### Added
 * Support for querying by culture in `Field`, `Group`, and `NodeName` queries
@@ -33,7 +37,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.1.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.2.0...HEAD
+[1.2.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.1.0...release-1.2.0
 [1.1.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.0.2...release-1.1.0
 [1.0.2]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.0.1...release-1.0.2
 [1.0.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.0.0...release-1.0.1
