@@ -35,6 +35,10 @@ namespace Our.Umbraco.Extensions.Search.Startup
                 valueTypeFactories.AddOrUpdate("udi", new DelegateFieldValueTypeFactory(x => new UdiValueType(x)));
 
                 fieldDefinitions.AddOrUpdate(new FieldDefinition("path", "list"));
+
+                fieldDefinitions.AddOrUpdate(new FieldDefinition("createDate", "date"));
+
+                fieldDefinitions.AddOrUpdate(new FieldDefinition("updateDate", "date"));
             }
         }
 
