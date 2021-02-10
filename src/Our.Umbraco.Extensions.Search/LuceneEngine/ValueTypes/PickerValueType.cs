@@ -32,7 +32,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
                     {
                         if (content.UrlSegment != null)
                         {
-                            doc.Add(new Field(FieldName, content.UrlSegment, Field.Store.YES, Field.Index.NOT_ANALYZED));
+                            doc.Add(new Field(FieldName, content.UrlSegment, Field.Store.NO, Field.Index.NOT_ANALYZED));
                         }
                     }
                 }
