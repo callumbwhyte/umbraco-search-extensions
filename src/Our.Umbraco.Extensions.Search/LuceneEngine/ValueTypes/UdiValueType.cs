@@ -6,10 +6,12 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 {
     public class UdiValueType : ListValueType
     {
-        public UdiValueType(string fieldName)
-            : base(fieldName)
-        {
+        private char Separator { get; }
 
+        public UdiValueType(string fieldName, char separator = ',')
+            : base(fieldName, separator)
+        {
+            Separator = separator;
         }
 
         protected override void AddSingleValue(Document doc, object value)
@@ -18,7 +20,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
             if (value is string valueString)
             {
-                var ids = valueString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var ids = valueString.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var id in ids)
                 {

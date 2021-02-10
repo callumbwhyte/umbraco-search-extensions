@@ -10,10 +10,14 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
     {
         private readonly PublishedContentHelper _publishedContentHelper;
 
-        public PickerValueType(string fieldName)
-            : base(fieldName, ',')
+        private char Separator { get; }
+
+        public PickerValueType(string fieldName, char separator = ',')
+            : base(fieldName, separator)
         {
             _publishedContentHelper = Current.Factory.GetInstance<PublishedContentHelper>();
+
+            Separator = separator;
         }
 
         protected override void AddSingleValue(Document doc, object value)
@@ -22,7 +26,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
             if (value is string valueString)
             {
-                var ids = valueString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                var ids = valueString.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var id in ids)
                 {
