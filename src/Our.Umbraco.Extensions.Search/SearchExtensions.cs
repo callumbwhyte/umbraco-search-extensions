@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Examine;
 using Examine.Search;
 
@@ -64,6 +65,16 @@ namespace Our.Umbraco.Extensions.Search
             return input
                 .Select(x => x.Proximity(proximity))
                 .ToArray();
+        }
+
+        /// <summary>
+        /// Splits a string, removing any stop words and empty parts
+        /// </summary>
+        public static string[] ToSafeArray(this string input, string separator = " ")
+        {
+            return input
+                .RemoveStopWords()
+                .Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
