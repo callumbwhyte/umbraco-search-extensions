@@ -28,6 +28,8 @@ namespace Our.Umbraco.Extensions.Search.Startup
 
                 var valueTypeFactories = umbracoIndex.FieldValueTypeCollection.ValueTypeFactories;
 
+                valueTypeFactories.AddOrUpdate("json", new DelegateFieldValueTypeFactory(x => new JsonValueType(x)));
+
                 valueTypeFactories.AddOrUpdate("list", new DelegateFieldValueTypeFactory(x => new ListValueType(x)));
 
                 valueTypeFactories.AddOrUpdate("picker", new DelegateFieldValueTypeFactory(x => new PickerValueType(x)));
