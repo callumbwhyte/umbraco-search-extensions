@@ -7,11 +7,13 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 {
     public class JsonValueType : IndexFieldValueTypeBase
     {
-        public JsonValueType(string fieldName)
+        public JsonValueType(string fieldName, string path = "")
             : base(fieldName)
         {
-
+            Path = path;
         }
+
+        public string Path { get; }
 
         protected override void AddSingleValue(Document doc, object value)
         {
@@ -19,11 +21,16 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
             {
                 var json = JToken.Parse(valueString);
 
-                var fields = GetFields(json, FieldName);
+                var tokens = json.SelectTokens(Path);
 
-                foreach (var field in fields)
+                foreach (var token in tokens)
                 {
-                    doc.Add(new Field(field.Key, field.Value, Field.Store.YES, Field.Index.ANALYZED));
+                    var fields = GetFields(token, FieldName);
+
+                    foreach (var field in fields)
+                    {
+                        doc.Add(new Field(field.Key, field.Value, Field.Store.YES, Field.Index.ANALYZED));
+                    }
                 }
             }
         }
