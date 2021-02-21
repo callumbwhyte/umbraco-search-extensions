@@ -29,7 +29,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
                     foreach (var field in fields)
                     {
-                        doc.Add(new Field(field.Key, field.Value, Field.Store.YES, Field.Index.ANALYZED));
+                        doc.Add(new Field(field.Key, field.Value, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
                     }
                 }
             }

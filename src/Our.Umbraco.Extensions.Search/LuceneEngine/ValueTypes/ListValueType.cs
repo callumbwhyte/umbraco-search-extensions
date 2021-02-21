@@ -19,7 +19,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
         {
             if (value is string stringValue)
             {
-                doc.Add(new Field(FieldName, stringValue, Field.Store.YES, Field.Index.ANALYZED));
+                doc.Add(new Field(FieldName, stringValue, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
             }
         }
 
