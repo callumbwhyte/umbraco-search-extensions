@@ -3,7 +3,7 @@ using Lucene.Net.Analysis;
 
 namespace Our.Umbraco.Extensions.Search.LuceneEngine.Analysis
 {
-    public class WhitespaceSeparatorTokenizer : WhitespaceTokenizer
+    internal class WhitespaceSeparatorTokenizer : WhitespaceTokenizer
     {
         public WhitespaceSeparatorTokenizer(TextReader @in, char separator)
             : base(@in)
