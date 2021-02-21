@@ -6,18 +6,14 @@ using Umbraco.Core.Composing;
 
 namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 {
-    public class PickerValueType : ListValueType
+    public class PickerValueType : UdiValueType
     {
         private readonly PublishedContentHelper _publishedContentHelper;
-
-        private char Separator { get; }
 
         public PickerValueType(string fieldName, char separator = ',')
             : base(fieldName, separator)
         {
             _publishedContentHelper = Current.Factory.GetInstance<PublishedContentHelper>();
-
-            Separator = separator;
         }
 
         protected override void AddSingleValue(Document doc, object value)

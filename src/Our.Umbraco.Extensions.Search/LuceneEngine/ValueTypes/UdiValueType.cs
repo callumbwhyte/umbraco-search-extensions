@@ -1,23 +1,22 @@
 ﻿using System;
+using Examine.LuceneEngine.Indexing;
 using Lucene.Net.Documents;
 using Umbraco.Core;
 
 namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 {
-    public class UdiValueType : ListValueType
+    public class UdiValueType : IndexFieldValueTypeBase
     {
-        private char Separator { get; }
-
         public UdiValueType(string fieldName, char separator = ',')
-            : base(fieldName, separator)
+            : base(fieldName)
         {
             Separator = separator;
         }
 
+        public char Separator { get; }
+
         protected override void AddSingleValue(Document doc, object value)
         {
-            base.AddSingleValue(doc, value);
-
             if (value is string valueString)
             {
                 var ids = valueString.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
@@ -26,7 +25,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
                 {
                     if (Udi.TryParse(id, out Udi udi) == true)
                     {
-                        doc.Add(new Field(FieldName, udi.ToString(), Field.Store.NO, Field.Index.NOT_ANALYZED));
+                        doc.Add(new Field(FieldName, udi.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                     }
                 }
             }
