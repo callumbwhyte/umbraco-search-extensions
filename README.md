@@ -111,21 +111,15 @@ foreach (var result in query.Execute())
 
 ### Advanced fields
 
-Search Extensions introduces several new field types into Examine – `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable. Defining which fields in the index use which types is done through the `IExamineManager`:
+Search Extensions introduces several new field types into Examine – `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
+
+Defining which fields in the index use which types is done through the `IExamineManager`:
 
 ```
 if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
 {
-    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("somePicker", "picker"));
+    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("fieldName", "fieldType"));
 }
-```
-
-The `picker` field type adds search-friendly aliases for the picked items into the index.
-
-A picker with a selected a content item called "Example Page" can be queried like this:
-
-```
-query.Field("somePicker", "example-page");
 ```
 
 Umbraco's "path" field is automatically indexed as a list and so a content item with the path `-1,1050,1100` can be queried like this:
@@ -135,6 +129,82 @@ query.Field("path", "1100");
 ```
 
 Umbraco's "createDate" and "updateDate" fields are automatically indexed as `date` values, whereas they would be regularly indexed as string values.
+
+#### Pickers
+
+The `picker` field type adds search-friendly aliases for the picked items into the index.
+
+A picker with a selected a content item called "Example Page" can be queried like this:
+
+```
+query.Field("somePicker", "example-page");
+```
+
+#### JSON
+
+The `json` field type splits the properties of a JSON object into individual fields within the index.
+
+Imagine a field called "locations" has the following JSON value:
+
+```
+[
+    {
+        "city": "London",
+        "position": {
+            "latitude": 51.5074,
+            "longitude": 0.1278
+        }
+    },
+    {
+        "city": "New York",
+        "position": {
+            "latitude": 40.7128,
+            "longitude": 74.0060
+        }
+    }
+]
+```
+
+Each property will be created as a field in the index, including any nested properties. In this example these would be called "locations_city", "locations_position_latitude" and "locations_position_longitude".
+
+It is possible to index a subset of a JSON object's properties by supplying a path in (https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm)[JSON Path format].
+
+Register a new `ValueTypeFactory` in `IExamineManager` implementing the `json` type, and define the path as a parameter, before assigning it to a field:
+
+```
+if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+{
+    index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("position", new DelegateFieldValueTypeFactory(x =>
+    {
+        new JsonValueType(x, "$[*].position")
+    }));
+
+    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("locations", "position"));
+}
+```
+
+#### Multiple field types
+
+There are advanced cases where indexing a value as multiple field types might be necessary, such as indexing different parts of the same JSON object into separately named fields or indexing specific properties within a JSON object as a defined type.
+
+The `MultipleValueTypeFactory` assigns a chain of field types to a field and applies them in sequence:
+
+```
+if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+{
+    index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("locationData", new MultipleValueTypeFactory(x =>
+        new IIndexFieldValueType[]
+        {
+            new JsonValueType(x, "$[*].city"),
+            new JsonValueType("position", "$[*].position")
+        }
+    ));
+
+    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("locations", "locationData"));
+}
+```
+
+In this example, the same "locations" JSON object will include all cities while an entirely new "position" field will be created including all latitudes and longitudes.
 
 ## Contribution guidelines
 
