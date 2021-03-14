@@ -12,9 +12,9 @@ namespace Our.Umbraco.Extensions.Search
         /// <summary>
         /// Get the results converted to the given type
         /// </summary>
-        public static IEnumerable<T> GetResults<T>(this ISearchResults searchResults)
+        public static IEnumerable<T> GetResults<T>(this IEnumerable<ISearchResult> results)
         {
-            return searchResults
+            return results
                 .Select(x => ConvertValue<T>(x))
                 .Where(x => x != null);
         }
