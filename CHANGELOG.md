@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.1] - 2021-03-14
+### Fixed
+* `GetResults` method is now available on `IEnumerable<ISearchResult>` to allow for more efficient paging
+* `SearchHelper` now uses `GetResults` method for consistency when getting typed results
+
 ## [1.4.0] - 2021-02-22
 ### Added
 * `JSON` value type for indexing nested properties as unique fields
@@ -59,7 +64,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.1...HEAD
+[1.4.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.0...release-1.4.1
 [1.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.3.0...release-1.4.0
 [1.3.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.2.0...release-1.3.0
 [1.2.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.1.0...release-1.2.0
