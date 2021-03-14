@@ -3,20 +3,16 @@ using System.Linq;
 using Examine;
 using Examine.Search;
 using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
-using Umbraco.Web.PublishedCache;
 
 namespace Our.Umbraco.Extensions.Search.Helpers
 {
     public class SearchHelper
     {
         private readonly IExamineManager _examineManager;
-        private readonly IPublishedSnapshotAccessor _publishedSnapshotAccessor;
 
-        public SearchHelper(IExamineManager examineManager, IPublishedSnapshotAccessor publishedSnapshotAccessor)
+        public SearchHelper(IExamineManager examineManager)
         {
             _examineManager = examineManager;
-            _publishedSnapshotAccessor = publishedSnapshotAccessor;
         }
 
         /// <summary>
@@ -51,10 +47,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
 
             totalResults = (int)searchResult.TotalItemCount;
 
-            var typedResult = searchResult
-                .ToPublishedSearchResults(_publishedSnapshotAccessor.PublishedSnapshot.Content)
-                .Select(x => x.Content as T)
-                .Where(x => x != null);
+            var typedResult = searchResult.GetResults<T>();
 
             return typedResult;
         }
@@ -83,9 +76,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
 
             var pagedResult = searchResult
                 .Skip((page - 1) * perPage)
-                .ToPublishedSearchResults(_publishedSnapshotAccessor.PublishedSnapshot.Content)
-                .Select(x => x.Content as T)
-                .Where(x => x != null)
+                .GetResults<T>()
                 .Take(perPage);
 
             return pagedResult;
