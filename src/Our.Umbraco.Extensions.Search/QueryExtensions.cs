@@ -31,7 +31,7 @@ namespace Our.Umbraco.Extensions.Search
         /// <remarks>
         /// A document is marked as visible when <c>umbracoNaviHide</c> is set to <c>false</c>
         /// </remarks>
-        public static IBooleanOperation IsVisble(this IQuery query)
+        public static IBooleanOperation IsVisible(this IQuery query)
         {
             return query.Field("umbracoNaviHide", "0");
         }
