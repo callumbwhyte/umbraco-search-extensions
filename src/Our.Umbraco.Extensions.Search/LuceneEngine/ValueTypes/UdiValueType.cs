@@ -23,9 +23,9 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
                 foreach (var id in ids)
                 {
-                    if (Udi.TryParse(id, out Udi udi) == true)
+                    if (GuidUdi.TryParse(id, out GuidUdi udi) == true)
                     {
-                        doc.Add(new Field(FieldName, udi.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                        doc.Add(new Field(FieldName, udi.Guid.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                     }
                 }
             }
