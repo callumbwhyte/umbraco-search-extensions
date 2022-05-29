@@ -12,9 +12,14 @@ namespace Our.Umbraco.Extensions.Search
         /// <remarks>
         /// If no <paramref name="templateId"/> is given, queries for documents without a template ID assigned
         /// </remarks>
-        public static INestedBooleanOperation HasTemplate(this INestedQuery query, int templateId = 0)
+        public static INestedBooleanOperation HasTemplate(this INestedQuery query, int? templateId = null)
         {
-            return query.Field("templateID", templateId.ToString());
+            if (templateId == null)
+            {
+                return query.GroupedNot(new[] { "templateID" }, "0");
+            }
+
+            return query.Field("templateID", templateId?.ToString());
         }
 
         /// <summary>

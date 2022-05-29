@@ -5,6 +5,7 @@
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Extensions.Search.svg)](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/search-extensions/)
 
+_Looking for Search Extensions for **Umbraco 9**? Check the [v9/dev](https://github.com/callumbwhyte/umbraco-search-extensions/tree/v9/dev) branch._
 
 ## Getting started
 
@@ -75,17 +76,17 @@ The `SearchHelper` class contains logic for commonly performed actions when sear
 The `Get<T>` method gets all results for a query cast to a given type, including `IPublishedContent`.
 
 ```
-var query = _searcher.CreatePublishedQuery();
+var query = searcher.CreatePublishedQuery();
 
-var results = _searchHelper.Get<T>(query, out int totalResults);
+var results = searchHelper.Get<T>(query, out int totalResults);
 ```
 
 The `Page<T>` method efficiently gets a given number of items *(`perPage`)* at a specific position *(`page`)* in the results for a query An optional type constraint can be added to also return paged results cast to `IPublishedContent`.
 
 ```
-var query = _searcher.CreatePublishedQuery();
+var query = searcher.CreatePublishedQuery();
 
-var results = _searchHelper.Page<T>(query, int page, int perPage, out int totalResults);
+var results = searchHelper.Page<T>(query, int page, int perPage, out int totalResults);
 ```
 
 All helper methods provide the total number of results found as an `out` parameter.
@@ -116,11 +117,13 @@ Search Extensions introduces several new field types into Examine – `json`, `l
 Defining which fields in the index use which types is done through the `IExamineManager`:
 
 ```
-if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
 {
     index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("fieldName", "fieldType"));
 }
 ```
+
+#### Core fields
 
 Umbraco's "path" field is automatically indexed as a list and so a content item with the path `-1,1050,1100` can be queried like this:
 
@@ -172,7 +175,7 @@ It is possible to index a subset of a JSON object's properties by supplying a pa
 Register a new `ValueTypeFactory` in `IExamineManager` implementing the `json` type, and define the path as a parameter, before assigning it to a field:
 
 ```
-if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
 {
     index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("position", new DelegateFieldValueTypeFactory(x =>
     {
@@ -190,7 +193,7 @@ There are advanced cases where indexing a value as multiple field types might be
 The `MultipleValueTypeFactory` assigns a chain of field types to a field and applies them in sequence:
 
 ```
-if (_examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
 {
     index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("locationData", new MultipleValueTypeFactory(x =>
         new IIndexFieldValueType[]
@@ -224,6 +227,6 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 
 ## License
 
-Copyright &copy; 2021 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2022 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.1] - 2022-02-29
+### Fixed
+* `CreatePublishedQuery` returns content without templates and with `umbracoNaviHide` set
+
 ## [1.5.0] - 2022-02-28
 ### Changed
 * Indexing UDI values as GUIDs instead of strings for easier searching
@@ -71,7 +75,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.5.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.5.1...HEAD
+[1.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.5.0...release-1.5.1
 [1.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.1...release-1.5.0
 [1.4.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.0...release-1.4.1
 [1.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.3.0...release-1.4.0
