@@ -5,11 +5,11 @@
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Extensions.Search.svg)](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/)
 [![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/search-extensions/)
 
-_Looking for Search Extensions for **Umbraco 9**? Check the [v9/dev](https://github.com/callumbwhyte/umbraco-search-extensions/tree/v9/dev) branch._
+_Looking for Search Extensions for **Umbraco 8**? Check the [v8/dev](https://github.com/callumbwhyte/umbraco-search-extensions/tree/v8/dev) branch._
 
 ## Getting started
 
-This package is supported on Umbraco 8.1+.
+This package is supported on Umbraco 9+.
 
 ### Installation
 
@@ -114,13 +114,25 @@ foreach (var result in query.Execute())
 
 Search Extensions introduces several new field types into Examine – `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
 
-Defining which fields in the index use which types is done through the `IExamineManager`:
+Examine allows controlling an index's fields, field types, and [more](https://shazwazza.github.io/Examine/configuration#iconfigurenamedoptions), via [.NET's Named Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options):
 
 ```
-if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
 {
-    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("fieldName", "fieldType"));
+    public void Configure(string name, LuceneDirectoryIndexOptions options)
+    {
+        if (name == "ExternalIndex")
+        {
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("fieldName", "fieldType"));
+        }
+    }
 }
+```
+
+The options class must be registered in the [Dependency Injection](https://our.umbraco.com/documentation/reference/using-ioc/) container to apply:
+
+```
+builder.Services.ConfigureOptions<ConfigureIndexOptions>();
 ```
 
 #### Core fields
@@ -172,17 +184,26 @@ Each property will be created as a field in the index, including any nested prop
 
 It is possible to index a subset of a JSON object's properties by supplying a path in (https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm)[JSON Path format].
 
-Register a new `ValueTypeFactory` in `IExamineManager` implementing the `json` type, and define the path as a parameter, before assigning it to a field:
+Register a new `ValueTypeFactory` in the index implementing the `json` type, and define the path as a parameter, before assigning it to a field:
 
 ```
-if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
 {
-    index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("position", new DelegateFieldValueTypeFactory(x =>
+    public void Configure(string name, LuceneDirectoryIndexOptions options)
     {
-        new JsonValueType(x, "$[*].position")
-    }));
+        if (name == "ExternalIndex")
+        {
+            options.IndexValueTypesFactory = new Dictionary<string, IFieldValueTypeFactory>(options.IndexValueTypesFactory)
+            {
+                ["position"] = new DelegateFieldValueTypeFactory(fieldName =>
+                {
+                    return new JsonValueType(fieldName, "$[*].position");
+                };
+            };
 
-    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("locations", "position"));
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("locations", "position"));
+        }
+    }
 }
 ```
 
@@ -193,17 +214,30 @@ There are advanced cases where indexing a value as multiple field types might be
 The `MultipleValueTypeFactory` assigns a chain of field types to a field and applies them in sequence:
 
 ```
-if (examineManager.TryGetIndex("ExternalIndex", out IIndex index))
+public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
 {
-    index.FieldValueTypeCollection.ValueTypeFactories.AddOrUpdate("locationData", new MultipleValueTypeFactory(x =>
-        new IIndexFieldValueType[]
+    public void Configure(string name, LuceneDirectoryIndexOptions options)
+    {
+        if (name == "ExternalIndex")
         {
-            new JsonValueType(x, "$[*].city"),
-            new JsonValueType("position", "$[*].position")
-        }
-    ));
+            options.IndexValueTypesFactory = new Dictionary<string, IFieldValueTypeFactory>(options.IndexValueTypesFactory)
+            {
+                ["locationData"] = new DelegateFieldValueTypeFactory(fieldName =>
+                {
+                    return new MultipleValueTypeFactory(
+                        fieldName,
+                        new IIndexFieldValueType[]
+                        {
+                            new JsonValueType(x, "$[*].city"),
+                            new JsonValueType("position", "$[*].position")
+                        }
+                    );
+                };
+            };
 
-    index.FieldDefinitionCollection.AddOrUpdate(new FieldDefinition("locations", "locationData"));
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("locations", "locationData"));
+        }
+    }
 }
 ```
 
