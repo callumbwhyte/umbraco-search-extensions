@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
-using Examine.LuceneEngine.Indexing;
+using Examine.Lucene.Indexing;
 using Lucene.Net.Documents;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
+namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class JsonValueType : IndexFieldValueTypeBase
     {
-        public JsonValueType(string fieldName, string path = "")
-            : base(fieldName)
+        public JsonValueType(string fieldName, ILoggerFactory loggerFactory, string path = "")
+            : base(fieldName, loggerFactory)
         {
             Path = path;
         }
@@ -29,7 +30,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
                     foreach (var field in fields)
                     {
-                        doc.Add(new Field(field.Key, field.Value, Field.Store.YES, Field.Index.ANALYZED, Field.TermVector.WITH_POSITIONS_OFFSETS));
+                        doc.Add(new TextField(field.Key, field.Value, Field.Store.YES));
                     }
                 }
             }

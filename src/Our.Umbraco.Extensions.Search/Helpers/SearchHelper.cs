@@ -2,29 +2,12 @@
 using System.Linq;
 using Examine;
 using Examine.Search;
-using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Our.Umbraco.Extensions.Search.Helpers
 {
     public class SearchHelper
     {
-        private readonly IExamineManager _examineManager;
-
-        public SearchHelper(IExamineManager examineManager)
-        {
-            _examineManager = examineManager;
-        }
-
-        /// <summary>
-        /// Get a searcher by name
-        /// </summary>
-        public ISearcher GetSearcher(string name)
-        {
-            _examineManager.TryGetSearcher(name, out ISearcher searcher);
-
-            return searcher;
-        }
-
         /// <summary>
         /// Get the results for the given query
         /// </summary>

@@ -1,16 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Examine.LuceneEngine.Indexing;
+using Examine.Lucene.Indexing;
 using Lucene.Net.Documents;
+using Microsoft.Extensions.Logging;
 
-namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
+namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     internal class MultiValueType : IndexFieldValueTypeBase
     {
         private readonly IEnumerable<IIndexFieldValueType> _fieldTypes;
 
-        public MultiValueType(string fieldName, IEnumerable<IIndexFieldValueType> fieldTypes)
-            : base(fieldName)
+        public MultiValueType(string fieldName, ILoggerFactory loggerFactory, IEnumerable<IIndexFieldValueType> fieldTypes)
+            : base(fieldName, loggerFactory)
         {
             _fieldTypes = fieldTypes;
         }
@@ -27,7 +28,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
                     foreach (var field in fields)
                     {
-                        fieldType.AddValue(doc, field.StringValue);
+                        fieldType.AddValue(doc, field.GetStringValue());
                     }
                 }
                 else

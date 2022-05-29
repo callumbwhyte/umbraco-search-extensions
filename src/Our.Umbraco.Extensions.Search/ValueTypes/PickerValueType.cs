@@ -1,19 +1,19 @@
 ﻿using System;
 using Lucene.Net.Documents;
+using Microsoft.Extensions.Logging;
+using Our.Umbraco.Extensions.Search.Composing;
 using Our.Umbraco.Extensions.Search.Helpers;
-using Umbraco.Core;
-using Umbraco.Core.Composing;
 
-namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
+namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class PickerValueType : UdiValueType
     {
         private readonly PublishedContentHelper _publishedContentHelper;
 
-        public PickerValueType(string fieldName, char separator = ',')
-            : base(fieldName, separator)
+        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',')
+            : base(fieldName, loggerFactory, separator)
         {
-            _publishedContentHelper = Current.Factory.GetInstance<PublishedContentHelper>();
+            _publishedContentHelper = ServiceLocator.GetInstance<PublishedContentHelper>();
         }
 
         protected override void AddSingleValue(Document doc, object value)
@@ -32,7 +32,7 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
                     {
                         if (content.UrlSegment != null)
                         {
-                            doc.Add(new Field(FieldName, content.UrlSegment, Field.Store.NO, Field.Index.NOT_ANALYZED));
+                            doc.Add(new StringField(FieldName, content.UrlSegment, Field.Store.NO));
                         }
                     }
                 }

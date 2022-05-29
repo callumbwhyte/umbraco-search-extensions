@@ -1,14 +1,15 @@
 ﻿using System;
-using Examine.LuceneEngine.Indexing;
+using Examine.Lucene.Indexing;
 using Lucene.Net.Documents;
-using Umbraco.Core;
+using Microsoft.Extensions.Logging;
+using Umbraco.Cms.Core;
 
-namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
+namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class UdiValueType : IndexFieldValueTypeBase
     {
-        public UdiValueType(string fieldName, char separator = ',')
-            : base(fieldName)
+        public UdiValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',')
+            : base(fieldName, loggerFactory)
         {
             Separator = separator;
         }
@@ -23,9 +24,9 @@ namespace Our.Umbraco.Extensions.Search.LuceneEngine.ValueTypes
 
                 foreach (var id in ids)
                 {
-                    if (GuidUdi.TryParse(id, out GuidUdi udi) == true)
+                    if (UdiParser.TryParse(id, out GuidUdi udi) == true)
                     {
-                        doc.Add(new Field(FieldName, udi.Guid.ToString(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                        doc.Add(new StringField(FieldName, udi.Guid.ToString(), Field.Store.YES));
                     }
                 }
             }

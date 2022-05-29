@@ -2,8 +2,9 @@
 using System.ComponentModel;
 using System.Linq;
 using Examine;
-using Umbraco.Core.Composing;
-using Umbraco.Core.Models.PublishedContent;
+using Our.Umbraco.Extensions.Search.Composing;
+using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Our.Umbraco.Extensions.Search
 {
@@ -60,7 +61,7 @@ namespace Our.Umbraco.Extensions.Search
                 return (T)converter.ConvertFrom(value);
             }
 
-            var mapper = Current.Mapper;
+            var mapper = ServiceLocator.GetInstance<IUmbracoMapper>();
 
             if (typeof(IPublishedContent).IsAssignableFrom(typeof(T)) == true)
             {

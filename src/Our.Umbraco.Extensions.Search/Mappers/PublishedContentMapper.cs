@@ -1,9 +1,9 @@
 ﻿using System;
 using Examine;
 using Our.Umbraco.Extensions.Search.Helpers;
-using Umbraco.Core;
-using Umbraco.Core.Mapping;
-using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Mapping;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Our.Umbraco.Extensions.Search.Mappers
 {
@@ -16,7 +16,7 @@ namespace Our.Umbraco.Extensions.Search.Mappers
             _publishedContentHelper = publishedContentHelper;
         }
 
-        public void DefineMaps(UmbracoMapper mapper)
+        public void DefineMaps(IUmbracoMapper mapper)
         {
             mapper.Define<ISearchResult, IPublishedContent>((source, context) => _publishedContentHelper.GetByString(source.Id));
 

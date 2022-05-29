@@ -1,9 +1,8 @@
 ﻿using System;
-using Umbraco.Core;
-using Umbraco.Core.Models;
-using Umbraco.Core.Models.PublishedContent;
-using Umbraco.Web;
-using UdiEntityType = Umbraco.Core.Constants.UdiEntityType;
+using Umbraco.Cms.Core;
+using Umbraco.Cms.Core.Models;
+using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Cms.Core.Web;
 
 namespace Our.Umbraco.Extensions.Search.Helpers
 {
@@ -28,7 +27,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
                 return GetByGuid(guidId);
             }
 
-            if (Udi.TryParse(id, out Udi udi) == true)
+            if (UdiParser.TryParse(id, out Udi udi) == true)
             {
                 return GetByUdi(udi);
             }
@@ -58,7 +57,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         {
             using (var context = _umbracoContextFactory.EnsureUmbracoContext())
             {
-                var umbracoType = UdiEntityType.ToUmbracoObjectType(udi.EntityType);
+                var umbracoType = UdiEntityTypeHelper.ToUmbracoObjectType(udi.EntityType);
 
                 if (umbracoType == UmbracoObjectTypes.Document)
                 {

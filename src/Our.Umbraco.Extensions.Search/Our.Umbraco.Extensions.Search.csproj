@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <Version Condition="'$(BUILD_BUILDNUMBER)' == ''">1.0.0.0</Version>
     <Version Condition="'$(BUILD_BUILDNUMBER)' != ''">$(BUILD_BUILDNUMBER)</Version>
     <Description>Extensions for performing searches in Umbraco</Description>
@@ -15,6 +15,6 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="UmbracoCms.Web" Version="8.1.0" />
+    <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[9.0.1,10.0.0)" />
   </ItemGroup>
 </Project>
