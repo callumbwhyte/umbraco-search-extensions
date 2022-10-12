@@ -53,7 +53,7 @@ query.And().NodeTypeAlias(string[] aliases)
 
 ### Cultures
 
-Umbraco properties that have been set to "vary by culture" are indexed with a specific alias: `{culture}_{fieldName}`. For example, if the "pageTitle" field varies by culture and has 2 languages, English and Spanish, the index would contain 2 fields: `en_pageTitle` and `es_pageTitle`.
+Umbraco properties that have been set to "vary by culture" are indexed with a specific alias: `{fieldName}_{culture}`. For example, if the "pageTitle" field varies by culture and has 2 languages, English and Spanish, the index would contain 2 fields: `pageTitle_en` and `pageTitle_es`.
 
 A culture can be passed to `Field` and `NodeName` queries like this:
 
@@ -81,7 +81,7 @@ var query = searcher.CreatePublishedQuery();
 var results = searchHelper.Get<T>(query, out int totalResults);
 ```
 
-The `Page<T>` method efficiently gets a given number of items *(`perPage`)* at a specific position *(`page`)* in the results for a query An optional type constraint can be added to also return paged results cast to `IPublishedContent`.
+The `Page<T>` method efficiently gets a given number of items *(`perPage`)* at a specific position *(`page`)* in the results for a query. An optional type constraint can be added to also return paged results cast to `IPublishedContent`.
 
 ```
 var query = searcher.CreatePublishedQuery();
