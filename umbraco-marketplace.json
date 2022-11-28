@@ -1,0 +1,16 @@
+{
+  "Title": "Search Extensions",
+  "Description": "Extensions for performing searches in Umbraco",
+  "Category": "Search",
+  "Tags": [ "Examine", "Lucene", "Search" ],
+  "LicenseTypes": [ "Free" ],
+  "PackageType": "Package",
+  "AuthorDetails": {
+    "Name": "Callum Whyte",
+    "Url": "https://www.callumwhyte.com/",
+    "ImageUrl": "https://github.com/callumbwhyte.png",
+    "SyncContributorsFromRepository": true
+  },
+  "DocumentationUrl": "https://github.com/callumbwhyte/umbraco-search-extensions",
+  "IssueTrackerUrl": "https://github.com/callumbwhyte/umbraco-search-extensions/issues"
+}

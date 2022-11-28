@@ -6,14 +6,20 @@
     <Description>Extensions for performing searches in Umbraco</Description>
     <Authors>Callum Whyte</Authors>
     <Copyright>Copyright © 2022 Callum Whyte, and other contributors</Copyright>
-    <PackageIconUrl>https://raw.githubusercontent.com/callumbwhyte/umbraco-search-extensions/main/docs/img/logo.png</PackageIconUrl>
-    <PackageLicenseUrl>https://github.com/callumbwhyte/umbraco-search-extensions/blob/main/LICENSE.md</PackageLicenseUrl>
+    <PackageIcon>docs\logo.png</PackageIcon>
+    <PackageLicenseFile>docs\LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>docs\README.md</PackageReadmeFile>
+    <PackageTags>umbraco search examine lucene umbraco-marketplace</PackageTags>
     <PackageProjectUrl>https://github.com/callumbwhyte/umbraco-search-extensions</PackageProjectUrl>
-    <PackageTags>umbraco search examine lucene</PackageTags>
     <RepositoryUrl>https://github.com/callumbwhyte/umbraco-search-extensions</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="docs" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="docs" />
+    <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="docs" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[9.0.1,10.0.0)" />
   </ItemGroup>
