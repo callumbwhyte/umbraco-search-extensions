@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.0.0] - 2022-11-28
+### Added
+* Initial release of Search Extensions for Umbraco v9, v10 (LTS), and v11
+
 ## [2.0.0] - 2022-05-30
 ### Added
-* Initial release of Search Extensions for Umbraco 9+
+* Initial release of Search Extensions for Umbraco 9
 
 ## [1.5.1] - 2022-02-29
 ### Fixed
@@ -79,7 +83,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-2.0.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.0...HEAD
+[3.0.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-2.0.0...release-3.0.0
 [2.0.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.5.1...release-2.0.0
 [1.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.5.0...release-1.5.1
 [1.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-1.4.1...release-1.5.0

@@ -3,21 +3,20 @@
 <img src="docs/img/logo.png?raw=true" alt="Umbraco Search Extensions" width="250" align="right" />
 
 [![NuGet release](https://img.shields.io/nuget/v/Our.Umbraco.Extensions.Search.svg)](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/)
-[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/website-utilities/search-extensions/)
-
-_Looking for Search Extensions for **Umbraco 8**? Check the [v8/dev](https://github.com/callumbwhyte/umbraco-search-extensions/tree/v8/dev) branch._
 
 ## Getting started
 
-This package is supported on Umbraco 9+.
+This package is supported on Umbraco v9, v10, and v11
 
 ### Installation
 
-Search Extensions is available from NuGet, or as a manual download directly from GitHub.
+Search Extensions is available via [NuGet](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/).
 
-#### NuGet package repository
+To install with the .NET CLI, run the following command:
 
-To [install from NuGet](https://www.nuget.org/packages/Our.Umbraco.Extensions.Search/), run the following command in your instance of Visual Studio.
+    $ dotnet add package Our.Umbraco.Extensions.Search
+
+To install from within Visual Studio, use the NuGet Package Manager UI or run the following command:
 
     PM> Install-Package Our.Umbraco.Extensions.Search
 
@@ -258,6 +257,7 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 ### A special #h5yr to our contributors
 
 * [Busra Sengul](https://github.com/busrasengul)
+* [Chriztian Steinmeier](https://github.com/greystate)
 
 ## License
 
