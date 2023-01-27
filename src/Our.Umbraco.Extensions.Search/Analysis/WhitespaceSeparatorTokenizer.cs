@@ -17,7 +17,7 @@ namespace Our.Umbraco.Extensions.Search.Analysis
 
         protected override bool IsTokenChar(int c)
         {
-            return Character.IsWhiteSpace(c) == false && Separator.Equals(c) == false;
+            return Character.IsWhiteSpace(c) == false && Separator.Equals((char)c) == false;
         }
     }
 }
