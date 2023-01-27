@@ -181,7 +181,7 @@ Imagine a field called "locations" has the following JSON value:
 
 Each property will be created as a field in the index, including any nested properties. In this example these would be called "locations_city", "locations_position_latitude" and "locations_position_longitude".
 
-It is possible to index a subset of a JSON object's properties by supplying a path in (https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm)[JSON Path format].
+It is possible to index a subset of a JSON object's properties by supplying a path in [JSON Path format](https://www.newtonsoft.com/json/help/html/QueryJsonSelectTokenJsonPath.htm).
 
 Register a new `ValueTypeFactory` in the index implementing the `json` type, and define the path as a parameter, before assigning it to a field:
 
@@ -258,9 +258,10 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 
 * [Busra Sengul](https://github.com/busrasengul)
 * [Chriztian Steinmeier](https://github.com/greystate)
+* [Dave Woestenborghs](https://github.com/dawoe)
 
 ## License
 
-Copyright &copy; 2022 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2023 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).
