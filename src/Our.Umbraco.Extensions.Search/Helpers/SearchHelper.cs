@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Examine;
 using Examine.Search;
@@ -13,11 +14,11 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// </summary>
         public ISearchResults Search(IBooleanOperation query, out int totalResults)
         {
-            var searchResult = query.Execute();
+            var searchResults = query.Execute();
 
-            totalResults = (int)searchResult.TotalItemCount;
+            totalResults = (int)searchResults.TotalItemCount;
 
-            return searchResult;
+            return searchResults;
         }
 
         /// <summary>
@@ -26,13 +27,11 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         public IEnumerable<T> Search<T>(IBooleanOperation query, out int totalResults)
             where T : class, IPublishedContent
         {
-            var searchResult = query.Execute();
+            var searchResults = query.Execute();
 
-            totalResults = (int)searchResult.TotalItemCount;
+            totalResults = (int)searchResults.TotalItemCount;
 
-            var typedResult = searchResult.GetResults<T>();
-
-            return typedResult;
+            return searchResults.GetResults<T>();
         }
 
         /// <summary>
@@ -40,13 +39,23 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// </summary>
         public IEnumerable<ISearchResult> Page(IBooleanOperation query, int page, int perPage, out int totalResults)
         {
-            var searchResult = Search(query, out totalResults);
+            var searchResults = Search(query, out totalResults);
 
-            var pagedResult = searchResult
+            return searchResults
                 .Skip((page - 1) * perPage)
                 .Take(perPage);
+        }
 
-            return pagedResult;
+        /// <summary>
+        /// Get paged results for the given query
+        /// </summary>
+        public IEnumerable<ISearchResult> Page(IBooleanOperation query, int page, int perPage, out int totalPages, out int totalResults)
+        {
+            var results = Page(query, page, perPage, out totalResults);
+
+            totalPages = (int)Math.Ceiling((decimal)totalResults / perPage);
+
+            return results;
         }
 
         /// <summary>
@@ -55,14 +64,25 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         public IEnumerable<T> Page<T>(IBooleanOperation query, int page, int perPage, out int totalResults)
             where T : class, IPublishedContent
         {
-            var searchResult = Search(query, out totalResults);
+            var searchResults = Search(query, out totalResults);
 
-            var pagedResult = searchResult
+            return searchResults
                 .Skip((page - 1) * perPage)
                 .GetResults<T>()
                 .Take(perPage);
+        }
 
-            return pagedResult;
+        /// <summary>
+        /// Get paged results for the given query
+        /// </summary>
+        public IEnumerable<T> Page<T>(IBooleanOperation query, int page, int perPage, out int totalPages, out int totalResults)
+            where T : class, IPublishedContent
+        {
+            var results = Page<T>(query, page, perPage, out totalResults);
+
+            totalPages = (int)Math.Ceiling((decimal)totalResults / perPage);
+
+            return results;
         }
     }
 }
