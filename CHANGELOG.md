@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.1.0] - 2023-06-22
+### Added
+* Easier paging of `ISearchResults` with new `Page` extensions
+
+### Changed
+* `SearchHelper` is now obsolete and will be removed in a future version, use extensions instead
+
 ## [3.0.2] - 2023-02-08
 ### Added
 * Overload for the `Page` method within `SearchHelper` that returns a page count
@@ -91,7 +98,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.2...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.1.0...HEAD
+[3.1.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.2...release-3.1.0
 [3.0.2]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.1...release-3.0.2
 [3.0.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.0...release-3.0.1
 [3.0.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-2.0.0...release-3.0.0

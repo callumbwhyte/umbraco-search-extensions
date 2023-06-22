@@ -70,31 +70,25 @@ query.And().GroupedOr(string[] fields, string culture)
 
 ### Searching
 
-The `SearchHelper` class contains logic for commonly performed actions when searching, particularly helpful for creating paged search functionality.
-
-The `Get<T>` method gets all results for a query cast to a given type, including `IPublishedContent`.
+The `Page<T>` extension methods efficiently get a given number of items *(`perPage`)* at a specific position *(`page`)* from Examine's `ISearchResults`. An optional type constraint can be added to also return paged results cast to `IPublishedContent`.
 
 ```
 var query = searcher.CreatePublishedQuery();
 
-var results = searchHelper.Get<T>(query, out int totalResults);
+var searchResults = query.Execute();
+
+var results = searchResults.Page<T>(query, int page, int perPage, out int totalPages, out int totalResults);
 ```
 
-The `Page<T>` method efficiently gets a given number of items *(`perPage`)* at a specific position *(`page`)* in the results for a query. An optional type constraint can be added to also return paged results cast to `IPublishedContent`.
+The total number of pages and results are exposed as an `out` parameter, but can be disgarded if not needed like so:
 
 ```
-var query = searcher.CreatePublishedQuery();
-
-var results = searchHelper.Page<T>(query, int page, int perPage, out int totalResults);
+searchResults.Page<T>(query, int page, int perPage, out _, out _);
 ```
-
-All helper methods provide the total number of results found as an `out` parameter.
 
 ### Results
 
-For more specific cases where the `SearchHelper` is not appropriate, the same features for accessing strongly typed results are available as extension methods.
-
-An entire results collection can be cast to a type like this:
+An entire results collection can be cast to a list of a given type like this:
 
 ```
 var results = query.Execute().GetResults<T>();
