@@ -16,7 +16,7 @@ namespace Our.Umbraco.Extensions.Search
         public static IEnumerable<T> GetResults<T>(this IEnumerable<ISearchResult> results)
         {
             return results
-                .Select(x => ConvertValue<T>(x))
+                .Select(ConvertValue<T>)
                 .Where(x => x != null);
         }
 
@@ -48,7 +48,7 @@ namespace Our.Umbraco.Extensions.Search
             var values = result.GetValues(field);
 
             return values
-                .Select(x => ConvertValue<T>(x))
+                .Select(ConvertValue<T>)
                 .Where(x => x != null);
         }
 

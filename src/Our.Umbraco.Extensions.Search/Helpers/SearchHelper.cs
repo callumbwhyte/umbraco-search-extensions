@@ -12,6 +12,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get the results for the given query
         /// </summary>
+        [Obsolete("Use Execute method on ISearchResults instead")]
         public ISearchResults Search(IBooleanOperation query, out int totalResults)
         {
             var searchResults = query.Execute();
@@ -24,6 +25,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get the results for the given query
         /// </summary>
+        [Obsolete("Use Execute method on ISearchResults instead")]
         public IEnumerable<T> Search<T>(IBooleanOperation query, out int totalResults)
             where T : class, IPublishedContent
         {
@@ -37,6 +39,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get paged results for the given query
         /// </summary>
+        [Obsolete("Use Page method on ISearchResults instead")]
         public IEnumerable<ISearchResult> Page(IBooleanOperation query, int page, int perPage, out int totalResults)
         {
             var searchResults = Search(query, out totalResults);
@@ -49,6 +52,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get paged results for the given query
         /// </summary>
+        [Obsolete("Use Page method on ISearchResults instead")]
         public IEnumerable<ISearchResult> Page(IBooleanOperation query, int page, int perPage, out int totalPages, out int totalResults)
         {
             var results = Page(query, page, perPage, out totalResults);
@@ -61,6 +65,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get paged results for the given query
         /// </summary>
+        [Obsolete("Use Page method on ISearchResults instead")]
         public IEnumerable<T> Page<T>(IBooleanOperation query, int page, int perPage, out int totalResults)
             where T : class, IPublishedContent
         {
@@ -75,6 +80,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         /// <summary>
         /// Get paged results for the given query
         /// </summary>
+        [Obsolete("Use Page method on ISearchResults instead")]
         public IEnumerable<T> Page<T>(IBooleanOperation query, int page, int perPage, out int totalPages, out int totalResults)
             where T : class, IPublishedContent
         {
