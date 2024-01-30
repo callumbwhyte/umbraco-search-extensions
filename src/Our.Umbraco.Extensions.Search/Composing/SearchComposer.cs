@@ -3,7 +3,12 @@ using Our.Umbraco.Extensions.Search.Helpers;
 using Our.Umbraco.Extensions.Search.Mappers;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
-using Umbraco.Cms.Web.Common.DependencyInjection;
+
+#if NET8_0_OR_GREATER
+    using UmbracoDependencyInjection13 = Umbraco.Cms.Core.DependencyInjection;
+#else
+    using UmbracoDependencyInjection = Umbraco.Cms.Web.Common.DependencyInjection;
+#endif
 
 namespace Our.Umbraco.Extensions.Search.Composing
 {
@@ -19,7 +24,11 @@ namespace Our.Umbraco.Extensions.Search.Composing
 
             builder.MapDefinitions().Add<PublishedContentMapper>();
 
-            ServiceLocator.Configure(type => StaticServiceProvider.Instance.GetService(type));
+#if NET8_0_OR_GREATER
+            ServiceLocator.Configure(type => UmbracoDependencyInjection13.StaticServiceProvider.Instance.GetService(type));
+#else
+            ServiceLocator.Configure(type => UmbracoDependencyInjection.StaticServiceProvider.Instance.GetService(type));
+#endif
         }
     }
 }
