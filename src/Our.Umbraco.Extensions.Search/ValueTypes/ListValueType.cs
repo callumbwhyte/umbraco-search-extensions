@@ -1,7 +1,7 @@
-﻿using Examine.Lucene.Indexing;
+﻿using Examine;
+using Examine.Lucene.Indexing;
 using Lucene.Net.Analysis;
 using Lucene.Net.Documents;
-using Lucene.Net.Util;
 using Microsoft.Extensions.Logging;
 using Our.Umbraco.Extensions.Search.Analysis;
 
@@ -25,6 +25,6 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
             }
         }
 
-        public override Analyzer Analyzer => new WhitespaceSeparatorAnalyzer(LuceneVersion.LUCENE_CURRENT, Separator);
+        public override Analyzer Analyzer => new WhitespaceSeparatorAnalyzer(LuceneInfo.CurrentVersion, Separator);
     }
 }

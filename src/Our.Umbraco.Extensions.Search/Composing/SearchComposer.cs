@@ -3,7 +3,9 @@ using Our.Umbraco.Extensions.Search.Helpers;
 using Our.Umbraco.Extensions.Search.Mappers;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
+#if !NET8_0_OR_GREATER
 using Umbraco.Cms.Web.Common.DependencyInjection;
+#endif
 
 namespace Our.Umbraco.Extensions.Search.Composing
 {
