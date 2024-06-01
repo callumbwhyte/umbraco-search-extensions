@@ -6,7 +6,7 @@
 
 ## Getting started
 
-This package is supported on Umbraco v9, v10, and v11
+This package is supported on Umbraco v9-v13 and v14
 
 ### Installation
 
@@ -253,9 +253,10 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 * [Busra Sengul](https://github.com/busrasengul)
 * [Chriztian Steinmeier](https://github.com/greystate)
 * [Dave Woestenborghs](https://github.com/dawoe)
+* [Gareth Wright](https://github.com/garpunkal)
 
 ## License
 
-Copyright &copy; 2023 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2024 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).
