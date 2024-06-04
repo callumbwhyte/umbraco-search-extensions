@@ -13,7 +13,7 @@ namespace Our.Umbraco.Extensions.Search
         /// </summary>
         public static IEnumerable<ISearchResult> Page(this ISearchResults results, int page, int perPage, out int totalResults)
         {
-            return results.Page(page, perPage, out totalResults, out _);
+            return results.Page(page, perPage, out _, out totalResults);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Our.Umbraco.Extensions.Search
         public static IEnumerable<T> Page<T>(this ISearchResults results, int page, int perPage, out int totalResults)
             where T : IPublishedContent
         {
-            return results.Page<T>(page, perPage, out totalResults, out _);
+            return results.Page<T>(page, perPage, out _, out totalResults);
         }
 
         /// <summary>
