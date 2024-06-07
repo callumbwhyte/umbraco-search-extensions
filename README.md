@@ -254,6 +254,7 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 * [Chriztian Steinmeier](https://github.com/greystate)
 * [Dave Woestenborghs](https://github.com/dawoe)
 * [Gareth Wright](https://github.com/garpunkal)
+* [Jonas Pyfferoen](https://github.com/kows)
 
 ## License
 
