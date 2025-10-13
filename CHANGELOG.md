@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.3.0] - 2025-10-13
+### Added
+* Support for Search Extensions on Umbraco 17 (LTS) and intermediate versions
+
 ## [3.2.1] - 2024-06-07
 ### Fixed
 * `Page` extensions return correct total results count
@@ -106,7 +110,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.1...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.3.0...HEAD
+[3.3.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.1...release-3.3.0
 [3.2.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.0...release-3.2.1
 [3.2.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.1.0...release-3.2.0
 [3.1.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.0.2...release-3.1.0
