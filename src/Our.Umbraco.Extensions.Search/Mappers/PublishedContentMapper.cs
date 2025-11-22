@@ -24,7 +24,7 @@ namespace Our.Umbraco.Extensions.Search.Mappers
 
             mapper.Define<Guid, IPublishedContent>((source, context) => _publishedContentHelper.GetByGuid(source));
 
-            mapper.Define<Udi, IPublishedContent>((source, context) => _publishedContentHelper.GetByUdi(source));
+            mapper.Define<GuidUdi, IPublishedContent>((source, context) => _publishedContentHelper.GetByUdi(source));
         }
     }
 }

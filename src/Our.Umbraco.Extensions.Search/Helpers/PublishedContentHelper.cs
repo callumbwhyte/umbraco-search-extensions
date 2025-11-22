@@ -27,9 +27,9 @@ namespace Our.Umbraco.Extensions.Search.Helpers
                 return GetByGuid(guidId);
             }
 
-            if (UdiParser.TryParse(id, out Udi udi) == true)
+            if (UdiParser.TryParse(id, out GuidUdi guidUdi) == true)
             {
-                return GetByUdi(udi);
+                return GetByUdi(guidUdi);
             }
 
             return null;
@@ -53,7 +53,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
             }
         }
 
-        public IPublishedContent GetByUdi(Udi udi)
+        public IPublishedContent GetByUdi(GuidUdi udi)
         {
             using (var context = _umbracoContextFactory.EnsureUmbracoContext())
             {
@@ -61,12 +61,12 @@ namespace Our.Umbraco.Extensions.Search.Helpers
 
                 if (umbracoType == UmbracoObjectTypes.Document)
                 {
-                    return context.UmbracoContext.Content.GetById(udi);
+                    return context.UmbracoContext.Content.GetById(udi.Guid);
                 }
 
                 if (umbracoType == UmbracoObjectTypes.Media)
                 {
-                    return context.UmbracoContext.Media.GetById(udi);
+                    return context.UmbracoContext.Media.GetById(udi.Guid);
                 }
             }
 
