@@ -33,7 +33,7 @@
     <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[13.0.0,15.0.0)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net9.0'">
-    <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[15.0.0,17.0.0)" />
+    <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[16.0.0,17.0.0)" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
     <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[17.0.0,18.0.0)" />
