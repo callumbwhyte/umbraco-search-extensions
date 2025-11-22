@@ -6,7 +6,7 @@
 
 ## Getting started
 
-This package is supported on Umbraco v13 (LTS) and v17 (LTS), but should also work on all intermediate versions
+This package is supported on Umbraco v13 (LTS) and v17 (LTS), but _[should](## "Umbraco 15 is supported on v3.3.0 only")_ also work on all intermediate versions
 
 ### Installation
 
@@ -122,11 +122,10 @@ public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndex
 }
 ```
 
-The options class must be registered in the [Dependency Injection](https://our.umbraco.com/documentation/reference/using-ioc/) container to apply:
+> [!IMPORTANT]
+> In Umbraco 16+ you must ensure any custom configuration is registered **after** Umbraco's own Examine configuration, by either decorating your `IComposer` with `[ComposeAfter(typeof(AddExamineComposer))]` or registering it after `.AddComposers()` is called in your `Program.cs` file.
 
-```
-builder.Services.ConfigureOptions<ConfigureIndexOptions>();
-```
+See [Umbraco's Custom Indexing docs](https://docs.umbraco.com/umbraco-cms/reference/searching/examine/indexing) for more details.
 
 #### Core fields
 
