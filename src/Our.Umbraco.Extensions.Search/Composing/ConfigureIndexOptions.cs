@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Examine;
 using Examine.Lucene;
 using Microsoft.Extensions.Logging;
@@ -18,13 +19,17 @@ namespace Our.Umbraco.Extensions.Search.Composing
 
         public void Configure(string name, LuceneDirectoryIndexOptions options)
         {
-            options.IndexValueTypesFactory = new Dictionary<string, IFieldValueTypeFactory>
-            {
-                { "json", new DelegateFieldValueTypeFactory(fieldName => new JsonValueType(fieldName, _loggerFactory)) },
-                { "list", new DelegateFieldValueTypeFactory(fieldName => new ListValueType(fieldName, _loggerFactory)) },
-                { "picker", new DelegateFieldValueTypeFactory(fieldName => new PickerValueType(fieldName, _loggerFactory)) },
-                { "udi", new DelegateFieldValueTypeFactory(fieldName => new UdiValueType(fieldName, _loggerFactory)) },
-            };
+            var valueTypesFactory = options.IndexValueTypesFactory?.ToDictionary(x => x.Key, x => x.Value) ?? new Dictionary<string, IFieldValueTypeFactory>();
+
+            valueTypesFactory.TryAdd("json", new DelegateFieldValueTypeFactory(fieldName => new JsonValueType(fieldName, _loggerFactory)));
+
+            valueTypesFactory.TryAdd("list", new DelegateFieldValueTypeFactory(fieldName => new ListValueType(fieldName, _loggerFactory)));
+
+            valueTypesFactory.TryAdd("picker", new DelegateFieldValueTypeFactory(fieldName => new PickerValueType(fieldName, _loggerFactory)));
+
+            valueTypesFactory.TryAdd("udi", new DelegateFieldValueTypeFactory(fieldName => new UdiValueType(fieldName, _loggerFactory)));
+
+            options.IndexValueTypesFactory = valueTypesFactory;
 
             options.FieldDefinitions.AddOrUpdate(new FieldDefinition("path", "list"));
 
@@ -33,6 +38,9 @@ namespace Our.Umbraco.Extensions.Search.Composing
             options.FieldDefinitions.AddOrUpdate(new FieldDefinition("updateDate", "date"));
         }
 
-        public void Configure(LuceneDirectoryIndexOptions options) => Configure(string.Empty, options);
+        public void Configure(LuceneDirectoryIndexOptions options)
+        {
+            Configure(string.Empty, options);
+        }
     }
 }
