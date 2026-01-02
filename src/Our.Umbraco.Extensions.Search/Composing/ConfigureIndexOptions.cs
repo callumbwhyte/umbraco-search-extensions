@@ -21,6 +21,8 @@ namespace Our.Umbraco.Extensions.Search.Composing
         {
             var valueTypesFactory = options.IndexValueTypesFactory?.ToDictionary(x => x.Key, x => x.Value) ?? new Dictionary<string, IFieldValueTypeFactory>();
 
+            valueTypesFactory.TryAdd("boolean", new DelegateFieldValueTypeFactory(fieldName => new BooleanValueType(fieldName, _loggerFactory)));
+
             valueTypesFactory.TryAdd("json", new DelegateFieldValueTypeFactory(fieldName => new JsonValueType(fieldName, _loggerFactory)));
 
             valueTypesFactory.TryAdd("list", new DelegateFieldValueTypeFactory(fieldName => new ListValueType(fieldName, _loggerFactory)));
@@ -31,11 +33,17 @@ namespace Our.Umbraco.Extensions.Search.Composing
 
             options.IndexValueTypesFactory = valueTypesFactory;
 
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("__Published", "boolean"));
+
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("__VariesByCulture", "boolean"));
+
             options.FieldDefinitions.AddOrUpdate(new FieldDefinition("path", "list"));
 
             options.FieldDefinitions.AddOrUpdate(new FieldDefinition("createDate", "date"));
 
             options.FieldDefinitions.AddOrUpdate(new FieldDefinition("updateDate", "date"));
+
+            options.FieldDefinitions.AddOrUpdate(new FieldDefinition("umbracoNaviHide", "boolean"));
         }
 
         public void Configure(LuceneDirectoryIndexOptions options)
