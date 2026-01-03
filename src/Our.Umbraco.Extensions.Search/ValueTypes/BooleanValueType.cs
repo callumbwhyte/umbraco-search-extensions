@@ -8,8 +8,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class BooleanValueType : IndexFieldValueTypeBase, IIndexRangeValueType<bool>, IIndexRangeValueType<int>
     {
-        public BooleanValueType(string fieldName, ILoggerFactory loggerFactory)
-            : base(fieldName, loggerFactory)
+        public BooleanValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
+            : base(fieldName, loggerFactory, store)
         {
 
         }
@@ -18,7 +18,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
             var boolValue = ConvertValue(value);
 
-            doc.Add(new Int32Field(FieldName, boolValue ? 1 : 0, Field.Store.YES));
+            doc.Add(new Int32Field(FieldName, boolValue ? 1 : 0, Store ? Field.Store.YES : Field.Store.NO));
         }
 
         public override Query GetQuery(string value)

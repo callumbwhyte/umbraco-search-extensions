@@ -8,8 +8,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class UdiValueType : IndexFieldValueTypeBase
     {
-        public UdiValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',')
-            : base(fieldName, loggerFactory)
+        public UdiValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
+            : base(fieldName, loggerFactory, store)
         {
             Separator = separator;
         }
@@ -26,7 +26,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
                 {
                     if (UdiParser.TryParse(id, out GuidUdi udi) == true)
                     {
-                        doc.Add(new StringField(FieldName, udi.Guid.ToString(), Field.Store.YES));
+                        doc.Add(new StringField(FieldName, udi.Guid.ToString(), Store ? Field.Store.YES : Field.Store.NO));
                     }
                 }
             }

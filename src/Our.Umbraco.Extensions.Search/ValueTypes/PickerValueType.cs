@@ -10,8 +10,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
     {
         private readonly PublishedContentHelper _publishedContentHelper;
 
-        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',')
-            : base(fieldName, loggerFactory, separator)
+        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
+            : base(fieldName, loggerFactory, separator, store)
         {
             _publishedContentHelper = ServiceLocator.GetInstance<PublishedContentHelper>();
         }

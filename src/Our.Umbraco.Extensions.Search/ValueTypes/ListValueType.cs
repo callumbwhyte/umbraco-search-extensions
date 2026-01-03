@@ -9,8 +9,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class ListValueType : IndexFieldValueTypeBase
     {
-        public ListValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',')
-            : base(fieldName, loggerFactory)
+        public ListValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
+            : base(fieldName, loggerFactory, store)
         {
             Separator = separator;
         }
@@ -21,7 +21,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
             if (value is string stringValue)
             {
-                doc.Add(new TextField(FieldName, stringValue, Field.Store.YES));
+                doc.Add(new TextField(FieldName, stringValue, Store ? Field.Store.YES : Field.Store.NO));
             }
         }
 

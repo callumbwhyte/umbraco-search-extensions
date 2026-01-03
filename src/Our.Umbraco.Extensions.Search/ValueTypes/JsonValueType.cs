@@ -8,8 +8,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class JsonValueType : IndexFieldValueTypeBase
     {
-        public JsonValueType(string fieldName, ILoggerFactory loggerFactory, string path = "")
-            : base(fieldName, loggerFactory)
+        public JsonValueType(string fieldName, ILoggerFactory loggerFactory, string path = "", bool store = true)
+            : base(fieldName, loggerFactory, store)
         {
             Path = path;
         }
@@ -30,7 +30,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 
                     foreach (var field in fields)
                     {
-                        doc.Add(new TextField(field.Key, field.Value, Field.Store.YES));
+                        doc.Add(new TextField(field.Key, field.Value, Store ? Field.Store.YES : Field.Store.NO));
                     }
                 }
             }

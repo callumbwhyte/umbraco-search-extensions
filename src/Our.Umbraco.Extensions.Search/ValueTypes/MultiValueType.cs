@@ -11,7 +11,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         private readonly IEnumerable<IIndexFieldValueType> _fieldTypes;
 
         public MultiValueType(string fieldName, ILoggerFactory loggerFactory, IEnumerable<IIndexFieldValueType> fieldTypes)
-            : base(fieldName, loggerFactory)
+            : base(fieldName, loggerFactory, false)
         {
             _fieldTypes = fieldTypes;
         }
