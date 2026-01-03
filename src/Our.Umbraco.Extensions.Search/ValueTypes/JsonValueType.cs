@@ -52,9 +52,9 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
                     values.AddRange(GetFields(child, alias));
                 }
             }
-            else
+            else if (token.ToObject<string>() is string value)
             {
-                values.Add(new KeyValuePair<string, string>(alias, token.ToObject<string>()));
+                values.Add(new KeyValuePair<string, string>(alias, value));
             }
 
             return values;
