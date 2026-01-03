@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.5.0]
+### Added
+* `Boolean` value type for `__Published`, `__VariesByCulture`, and `umbracoNaviHide` fields
+
+### Fixed
+* Exposing `store` option for all value types
+* Prevent JSON fields from including null values
+
 ## [3.4.0] - 2025-11-22
 ### Fixed
 * Ensuring `SearchComposer` always runs before Umbraco on Umbraco 16+
@@ -117,7 +125,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.4.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...HEAD
+[3.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.4.0...release-3.5.0
 [3.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.3.0...release-3.4.0
 [3.3.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.1...release-3.3.0
 [3.2.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.0...release-3.2.1

@@ -105,7 +105,7 @@ foreach (var result in query.Execute())
 
 ### Advanced fields
 
-Search Extensions introduces several new field types into Examine – `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
+Search Extensions introduces several new field types into Examine – `boolean`, `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
 
 Examine allows controlling an index's fields, field types, and [more](https://shazwazza.github.io/Examine/configuration#iconfigurenamedoptions), via [.NET's Named Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options):
 
@@ -135,7 +135,7 @@ Umbraco's "path" field is automatically indexed as a list and so a content item 
 query.Field("path", "1100");
 ```
 
-Umbraco's "createDate" and "updateDate" fields are automatically indexed as `date` values, whereas they would be regularly indexed as string values.
+Umbraco's "createDate" and "updateDate" fields are automatically indexed as `date` values, whereas they would be regularly indexed as string values. "__Published" and "__VariesByCulture" are indexed as `boolean` values.
 
 #### Pickers
 
@@ -241,7 +241,7 @@ To raise a new bug, create an issue on the GitHub repository. To fix a bug or ad
 
 ### Who do I talk to?
 
-This project is maintained by [Callum Whyte](https://callumwhyte.com/) and contributors. If you have any questions about the project please get in touch on [Twitter](https://twitter.com/callumbwhyte), or by raising an issue on GitHub.
+This project is maintained by [Callum Whyte](https://callumwhyte.com/) and contributors. If you have any questions about the project please raising an issue on GitHub.
 
 ## Credits
 
@@ -257,6 +257,6 @@ The package logo uses the [Magnifying Glass](https://thenounproject.com/term/sea
 
 ## License
 
-Copyright &copy; 2025 [Callum Whyte](https://callumwhyte.com/), and other contributors
+Copyright &copy; 2026 [Callum Whyte](https://callumwhyte.com/), and other contributors
 
 Licensed under the [MIT License](LICENSE.md).
