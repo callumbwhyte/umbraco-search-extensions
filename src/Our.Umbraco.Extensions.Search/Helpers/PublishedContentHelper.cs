@@ -1,9 +1,15 @@
 ﻿using System;
-using Our.Umbraco.Extensions.Search.Composing;
+using Microsoft.Extensions.DependencyInjection;
 using Umbraco.Cms.Core;
+#if NET8_0_OR_GREATER
+using Umbraco.Cms.Core.DependencyInjection;
+#endif
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.Web;
+#if !NET8_0_OR_GREATER
+using Umbraco.Cms.Web.Common.DependencyInjection;
+#endif
 
 namespace Our.Umbraco.Extensions.Search.Helpers
 {
@@ -16,7 +22,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
             _umbracoContextFactory = umbracoContextFactory;
         }
 
-        public static PublishedContentHelper Instance => ServiceLocator.GetInstance<PublishedContentHelper>();
+        public static PublishedContentHelper Instance => StaticServiceProvider.Instance.GetRequiredService<PublishedContentHelper>();
 
         public IPublishedContent GetByString(string id)
         {

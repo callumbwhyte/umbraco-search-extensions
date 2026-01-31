@@ -6,9 +6,6 @@ using Umbraco.Cms.Core.DependencyInjection;
 #if NET9_0_OR_GREATER
 using Umbraco.Cms.Infrastructure.Examine;
 #endif
-#if !NET8_0_OR_GREATER
-using Umbraco.Cms.Web.Common.DependencyInjection;
-#endif
 
 namespace Our.Umbraco.Extensions.Search.Composing
 {
@@ -26,8 +23,6 @@ namespace Our.Umbraco.Extensions.Search.Composing
             builder.Services.ConfigureOptions<ConfigureIndexOptions>();
 
             builder.MapDefinitions().Add<PublishedContentMapper>();
-
-            ServiceLocator.Configure(type => StaticServiceProvider.Instance.GetService(type));
         }
     }
 }

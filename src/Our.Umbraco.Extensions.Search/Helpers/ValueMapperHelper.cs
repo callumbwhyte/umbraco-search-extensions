@@ -1,7 +1,13 @@
 ﻿using System.ComponentModel;
-using Our.Umbraco.Extensions.Search.Composing;
+using Microsoft.Extensions.DependencyInjection;
+#if NET8_0_OR_GREATER
+using Umbraco.Cms.Core.DependencyInjection;
+#endif
 using Umbraco.Cms.Core.Mapping;
 using Umbraco.Cms.Core.Models.PublishedContent;
+#if !NET8_0_OR_GREATER
+using Umbraco.Cms.Web.Common.DependencyInjection;
+#endif
 
 namespace Our.Umbraco.Extensions.Search.Helpers
 {
@@ -14,7 +20,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
             _mapper = mapper;
         }
 
-        public static ValueMapperHelper Instance => ServiceLocator.GetInstance<ValueMapperHelper>();
+        public static ValueMapperHelper Instance => StaticServiceProvider.Instance.GetRequiredService<ValueMapperHelper>();
 
         public T ConvertValue<T>(object value)
         {
