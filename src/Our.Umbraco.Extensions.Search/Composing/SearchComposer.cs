@@ -21,6 +21,8 @@ namespace Our.Umbraco.Extensions.Search.Composing
         {
             builder.Services.AddSingleton<PublishedContentHelper>();
 
+            builder.Services.AddSingleton<ValueMapperHelper>();
+
             builder.Services.ConfigureOptions<ConfigureIndexOptions>();
 
             builder.MapDefinitions().Add<PublishedContentMapper>();

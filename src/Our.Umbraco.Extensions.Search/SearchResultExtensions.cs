@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using Examine;
-using Our.Umbraco.Extensions.Search.Composing;
-using Umbraco.Cms.Core.Mapping;
-using Umbraco.Cms.Core.Models.PublishedContent;
+using Our.Umbraco.Extensions.Search.Helpers;
 
 namespace Our.Umbraco.Extensions.Search
 {
@@ -16,7 +13,7 @@ namespace Our.Umbraco.Extensions.Search
         public static IEnumerable<T> GetResults<T>(this IEnumerable<ISearchResult> results)
         {
             return results
-                .Select(ConvertValue<T>)
+                .Select(ValueMapperHelper.Instance.ConvertValue<T>)
                 .Where(x => x != null);
         }
 
@@ -37,7 +34,7 @@ namespace Our.Umbraco.Extensions.Search
         {
             result.Values.TryGetValue(field, out string value);
 
-            return ConvertValue<T>(value);
+            return ValueMapperHelper.Instance.ConvertValue<T>(value);
         }
 
         /// <summary>
@@ -48,27 +45,8 @@ namespace Our.Umbraco.Extensions.Search
             var values = result.GetValues(field);
 
             return values
-                .Select(ConvertValue<T>)
+                .Select(ValueMapperHelper.Instance.ConvertValue<T>)
                 .Where(x => x != null);
-        }
-
-        private static T ConvertValue<T>(object value)
-        {
-            var converter = TypeDescriptor.GetConverter(typeof(T));
-
-            if (converter.CanConvertFrom(value.GetType()) == true)
-            {
-                return (T)converter.ConvertFrom(value);
-            }
-
-            var mapper = ServiceLocator.GetInstance<IUmbracoMapper>();
-
-            if (typeof(IPublishedContent).IsAssignableFrom(typeof(T)) == true)
-            {
-                return (T)mapper.Map<IPublishedContent>(value);
-            }
-
-            return mapper.Map<T>(value);
         }
     }
 }

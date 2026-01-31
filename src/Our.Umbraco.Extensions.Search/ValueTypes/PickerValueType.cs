@@ -1,19 +1,16 @@
 ﻿using System;
 using Lucene.Net.Documents;
 using Microsoft.Extensions.Logging;
-using Our.Umbraco.Extensions.Search.Composing;
 using Our.Umbraco.Extensions.Search.Helpers;
 
 namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class PickerValueType : UdiValueType
     {
-        private readonly PublishedContentHelper _publishedContentHelper;
-
         public PickerValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
             : base(fieldName, loggerFactory, separator, store)
         {
-            _publishedContentHelper = ServiceLocator.GetInstance<PublishedContentHelper>();
+
         }
 
         protected override void AddSingleValue(Document doc, object value)
@@ -26,7 +23,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 
                 foreach (var id in ids)
                 {
-                    var content = _publishedContentHelper.GetByString(id);
+                    var content = PublishedContentHelper.Instance.GetByString(id);
 
                     if (content != null)
                     {

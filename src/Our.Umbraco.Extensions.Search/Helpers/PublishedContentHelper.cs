@@ -1,4 +1,5 @@
 ﻿using System;
+using Our.Umbraco.Extensions.Search.Composing;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -14,6 +15,8 @@ namespace Our.Umbraco.Extensions.Search.Helpers
         {
             _umbracoContextFactory = umbracoContextFactory;
         }
+
+        public static PublishedContentHelper Instance => ServiceLocator.GetInstance<PublishedContentHelper>();
 
         public IPublishedContent GetByString(string id)
         {
