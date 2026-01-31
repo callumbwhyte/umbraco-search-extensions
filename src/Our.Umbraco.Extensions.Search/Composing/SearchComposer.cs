@@ -19,8 +19,6 @@ namespace Our.Umbraco.Extensions.Search.Composing
     {
         public void Compose(IUmbracoBuilder builder)
         {
-            builder.Services.AddSingleton<SearchHelper>();
-
             builder.Services.AddSingleton<PublishedContentHelper>();
 
             builder.Services.ConfigureOptions<ConfigureIndexOptions>();
