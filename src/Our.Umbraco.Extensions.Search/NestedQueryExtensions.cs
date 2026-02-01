@@ -16,10 +16,10 @@ namespace Our.Umbraco.Extensions.Search
         {
             if (templateId == null)
             {
-                return query.GroupedNot(new[] { "templateID" }, "0");
+                return query.GroupedNot(["templateID"], "0");
             }
 
-            return query.Field("templateID", templateId?.ToString());
+            return query.Field("templateID", templateId.ToString()!);
         }
 
         /// <summary>
@@ -46,9 +46,8 @@ namespace Our.Umbraco.Extensions.Search
         /// </summary>
         public static INestedBooleanOperation NodeTypeAlias(this INestedQuery query, string[] aliases)
         {
-            return query.GroupedOr(new[] { "__NodeTypeAlias" }, aliases);
+            return query.GroupedOr(["__NodeTypeAlias"], aliases);
         }
-
 
         #region Cultures
 

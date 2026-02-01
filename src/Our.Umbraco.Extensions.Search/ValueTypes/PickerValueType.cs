@@ -7,8 +7,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class PickerValueType : UdiValueType
     {
-        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
-            : base(fieldName, loggerFactory, separator, store)
+        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
+            : base(fieldName, loggerFactory, store)
         {
 
         }
@@ -17,20 +17,17 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
             base.AddSingleValue(doc, value);
 
-            if (value is string valueString)
+            if (value is string stringValue)
             {
-                var ids = valueString.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
+                var ids = stringValue.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var id in ids)
                 {
                     var content = PublishedContentHelper.Instance.GetByString(id);
 
-                    if (content != null)
+                    if (content?.UrlSegment != null)
                     {
-                        if (content.UrlSegment != null)
-                        {
-                            doc.Add(new StringField(FieldName, content.UrlSegment, Field.Store.NO));
-                        }
+                        doc.Add(new StringField(FieldName, content.UrlSegment, Field.Store.NO));
                     }
                 }
             }

@@ -17,7 +17,7 @@ namespace Our.Umbraco.Extensions.Search.Composing
             _loggerFactory = loggerFactory;
         }
 
-        public void Configure(string name, LuceneDirectoryIndexOptions options)
+        public void Configure(string? name, LuceneDirectoryIndexOptions options)
         {
             var valueTypesFactory = options.IndexValueTypesFactory?.ToDictionary(x => x.Key, x => x.Value) ?? new Dictionary<string, IFieldValueTypeFactory>();
 

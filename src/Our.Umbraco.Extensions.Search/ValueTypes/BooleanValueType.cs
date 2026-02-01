@@ -21,7 +21,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
             doc.Add(new Int32Field(FieldName, boolValue ? 1 : 0, Store ? Field.Store.YES : Field.Store.NO));
         }
 
-        public override Query GetQuery(string value)
+        public override Query? GetQuery(string value)
         {
             return base.GetQuery(ConvertValue(value) ? "1" : "0");
         }

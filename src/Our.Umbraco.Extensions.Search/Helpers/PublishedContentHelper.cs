@@ -24,7 +24,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
 
         public static PublishedContentHelper Instance => StaticServiceProvider.Instance.GetRequiredService<PublishedContentHelper>();
 
-        public IPublishedContent GetByString(string id)
+        public IPublishedContent? GetByString(string id)
         {
             if (int.TryParse(id, out int intId) == true)
             {
@@ -36,7 +36,7 @@ namespace Our.Umbraco.Extensions.Search.Helpers
                 return GetByGuid(guidId);
             }
 
-            if (UdiParser.TryParse(id, out GuidUdi guidUdi) == true)
+            if (UdiParser.TryParse(id, out GuidUdi? guidUdi) && guidUdi != null)
             {
                 return GetByUdi(guidUdi);
             }
@@ -44,39 +44,36 @@ namespace Our.Umbraco.Extensions.Search.Helpers
             return null;
         }
 
-        public IPublishedContent GetByInt(int id)
+        public IPublishedContent? GetByInt(int id)
         {
-            using (var context = _umbracoContextFactory.EnsureUmbracoContext())
-            {
-                return context.UmbracoContext.Content.GetById(id)
-                    ?? context.UmbracoContext.Media.GetById(id);
-            }
+            using var context = _umbracoContextFactory.EnsureUmbracoContext();
+
+            return context?.UmbracoContext?.Content?.GetById(id)
+                ?? context?.UmbracoContext?.Media?.GetById(id);
         }
 
-        public IPublishedContent GetByGuid(Guid id)
+        public IPublishedContent? GetByGuid(Guid id)
         {
-            using (var context = _umbracoContextFactory.EnsureUmbracoContext())
-            {
-                return context.UmbracoContext.Content.GetById(id)
-                    ?? context.UmbracoContext.Media.GetById(id);
-            }
+            using var context = _umbracoContextFactory.EnsureUmbracoContext();
+
+            return context?.UmbracoContext?.Content?.GetById(id)
+                ?? context?.UmbracoContext?.Media?.GetById(id);
         }
 
-        public IPublishedContent GetByUdi(GuidUdi udi)
+        public IPublishedContent? GetByUdi(GuidUdi udi)
         {
-            using (var context = _umbracoContextFactory.EnsureUmbracoContext())
+            using var context = _umbracoContextFactory.EnsureUmbracoContext();
+
+            var umbracoType = UdiEntityTypeHelper.ToUmbracoObjectType(udi.EntityType);
+
+            if (umbracoType == UmbracoObjectTypes.Document)
             {
-                var umbracoType = UdiEntityTypeHelper.ToUmbracoObjectType(udi.EntityType);
+                return context?.UmbracoContext?.Content?.GetById(udi.Guid);
+            }
 
-                if (umbracoType == UmbracoObjectTypes.Document)
-                {
-                    return context.UmbracoContext.Content.GetById(udi.Guid);
-                }
-
-                if (umbracoType == UmbracoObjectTypes.Media)
-                {
-                    return context.UmbracoContext.Media.GetById(udi.Guid);
-                }
+            if (umbracoType == UmbracoObjectTypes.Media)
+            {
+                return context?.UmbracoContext?.Media?.GetById(udi.Guid);
             }
 
             return null;

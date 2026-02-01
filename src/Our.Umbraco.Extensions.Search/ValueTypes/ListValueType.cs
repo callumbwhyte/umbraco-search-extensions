@@ -12,7 +12,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 
         }
 
-        public string[] Separators { get; } = new[] { ",", "\n", "\r\n" };
+        public string[] Separators { get; init; } = [",", "\r\n", "\n"];
 
         protected override void AddSingleValue(Document doc, object value)
         {

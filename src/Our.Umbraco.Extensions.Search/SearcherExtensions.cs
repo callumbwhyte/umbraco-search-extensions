@@ -8,7 +8,7 @@ namespace Our.Umbraco.Extensions.Search
         /// <summary>
         /// Creates a query with predefined criteria for published content
         /// </summary>
-        public static IBooleanOperation CreatePublishedQuery(this ISearcher searcher, string category = null, BooleanOperation defaultOperation = BooleanOperation.And)
+        public static IBooleanOperation CreatePublishedQuery(this ISearcher searcher, string? category = null, BooleanOperation defaultOperation = BooleanOperation.And)
         {
             var query = searcher
                 .CreateQuery(category, defaultOperation)

@@ -8,23 +8,23 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class UdiValueType : IndexFieldValueTypeBase
     {
-        public UdiValueType(string fieldName, ILoggerFactory loggerFactory, char separator = ',', bool store = true)
+        public UdiValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
             : base(fieldName, loggerFactory, store)
         {
-            Separator = separator;
+
         }
 
-        public char Separator { get; }
+        public string[] Separators { get; init; } = [",", "\r\n", "\n"];
 
         protected override void AddSingleValue(Document doc, object value)
         {
-            if (value is string valueString)
+            if (value is string stringValue)
             {
-                var ids = valueString.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
+                var ids = stringValue.Split(Separators, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var id in ids)
                 {
-                    if (UdiParser.TryParse(id, out GuidUdi udi) == true)
+                    if (UdiParser.TryParse(id, out GuidUdi? udi) && udi != null)
                     {
                         doc.Add(new StringField(FieldName, udi.Guid.ToString(), Store ? Field.Store.YES : Field.Store.NO));
                     }

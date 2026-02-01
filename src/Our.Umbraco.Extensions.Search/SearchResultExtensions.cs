@@ -14,15 +14,15 @@ namespace Our.Umbraco.Extensions.Search
         {
             return results
                 .Select(ValueMapperHelper.Instance.ConvertValue<T>)
-                .Where(x => x != null);
+                .Where(x => x != null)!;
         }
 
         /// <summary>
         /// Get the value for a particular field in the results
         /// </summary>
-        public static string Value(this ISearchResult result, string field)
+        public static string? Value(this ISearchResult result, string field)
         {
-            result.Values.TryGetValue(field, out string value);
+            result.Values.TryGetValue(field, out var value);
 
             return value;
         }
@@ -30,9 +30,9 @@ namespace Our.Umbraco.Extensions.Search
         /// <summary>
         /// Get the value for a particular field in the results
         /// </summary>
-        public static T Value<T>(this ISearchResult result, string field)
+        public static T? Value<T>(this ISearchResult result, string field)
         {
-            result.Values.TryGetValue(field, out string value);
+            result.Values.TryGetValue(field, out var value);
 
             return ValueMapperHelper.Instance.ConvertValue<T>(value);
         }
@@ -46,7 +46,7 @@ namespace Our.Umbraco.Extensions.Search
 
             return values
                 .Select(ValueMapperHelper.Instance.ConvertValue<T>)
-                .Where(x => x != null);
+                .Where(x => x != null)!;
         }
     }
 }

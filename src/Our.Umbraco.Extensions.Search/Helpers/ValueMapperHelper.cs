@@ -22,18 +22,23 @@ namespace Our.Umbraco.Extensions.Search.Helpers
 
         public static ValueMapperHelper Instance => StaticServiceProvider.Instance.GetRequiredService<ValueMapperHelper>();
 
-        public T ConvertValue<T>(object value)
+        public T? ConvertValue<T>(object? value)
         {
+            if (value == null)
+            {
+                return default;
+            }
+
             var converter = TypeDescriptor.GetConverter(typeof(T));
 
             if (converter.CanConvertFrom(value.GetType()) == true)
             {
-                return (T)converter.ConvertFrom(value);
+                return (T)converter.ConvertFrom(value)!;
             }
 
             if (typeof(IPublishedContent).IsAssignableFrom(typeof(T)) == true)
             {
-                return (T)_mapper.Map<IPublishedContent>(value);
+                return (T)_mapper.Map<IPublishedContent>(value)!;
             }
 
             return _mapper.Map<T>(value);

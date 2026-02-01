@@ -18,11 +18,11 @@ namespace Our.Umbraco.Extensions.Search.Mappers
 
         public void DefineMaps(IUmbracoMapper mapper)
         {
-            mapper.Define<ISearchResult, IPublishedContent>((source, context) => _publishedContentHelper.GetByString(source.Id));
+            mapper.Define<ISearchResult, IPublishedContent>((source, context) => _publishedContentHelper.GetByString(source.Id)!);
 
-            mapper.Define<string, IPublishedContent>((source, context) => _publishedContentHelper.GetByString(source));
+            mapper.Define<string, IPublishedContent>((source, context) => _publishedContentHelper.GetByString(source)!);
 
-            mapper.Define<Guid, IPublishedContent>((source, context) => _publishedContentHelper.GetByGuid(source));
+            mapper.Define<Guid, IPublishedContent>((source, context) => _publishedContentHelper.GetByGuid(source)!);
 
             mapper.Define<GuidUdi, IPublishedContent>((source, context) => _publishedContentHelper.GetByUdi(source));
         }

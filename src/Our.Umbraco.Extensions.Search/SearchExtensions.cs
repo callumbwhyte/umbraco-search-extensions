@@ -74,7 +74,7 @@ namespace Our.Umbraco.Extensions.Search
         {
             return input
                 .RemoveStopWords()
-                .Split(new[] { separator }, StringSplitOptions.RemoveEmptyEntries);
+                .Split([separator], StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

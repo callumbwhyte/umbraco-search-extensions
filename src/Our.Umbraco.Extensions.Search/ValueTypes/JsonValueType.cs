@@ -8,19 +8,19 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class JsonValueType : IndexFieldValueTypeBase
     {
-        public JsonValueType(string fieldName, ILoggerFactory loggerFactory, string path = "", bool store = true)
+        public JsonValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
             : base(fieldName, loggerFactory, store)
         {
-            Path = path;
+
         }
 
-        public string Path { get; }
+        public string Path { get; init; } = string.Empty;
 
         protected override void AddSingleValue(Document doc, object value)
         {
-            if (value is string valueString)
+            if (value is string stringValue)
             {
-                var json = JToken.Parse(valueString);
+                var json = JToken.Parse(stringValue);
 
                 var tokens = json.SelectTokens(Path);
 
