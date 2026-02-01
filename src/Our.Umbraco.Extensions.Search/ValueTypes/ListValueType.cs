@@ -4,10 +4,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
-    public class ListValueType : IndexFieldValueTypeBase
+    public class ListValueType : IndexFacetFieldValueType
     {
-        public ListValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
-            : base(fieldName, loggerFactory, store)
+        public ListValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true, bool faceted = false, bool taxonomyFaceted = false)
+            : base(fieldName, loggerFactory, store, faceted, taxonomyFaceted)
         {
 
         }
@@ -23,6 +23,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
                 foreach (var item in items)
                 {
                     doc.Add(new TextField(FieldName, item, Store ? Field.Store.YES : Field.Store.NO));
+
+                    AddSingleFacetValue(doc, item);
                 }
             }
         }

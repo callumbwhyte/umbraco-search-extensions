@@ -22,6 +22,9 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="docs" />
     <None Include="..\..\docs\img\logo.png" Pack="true" PackagePath="docs" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Examine" Version="4.0.0-beta.1" />
+  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
     <PackageReference Include="Umbraco.Cms.Examine.Lucene" Version="[10.0.0,11.0.0)" />
   </ItemGroup>

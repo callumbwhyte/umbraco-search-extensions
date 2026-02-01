@@ -7,8 +7,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 {
     public class PickerValueType : UdiValueType
     {
-        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true)
-            : base(fieldName, loggerFactory, store)
+        public PickerValueType(string fieldName, ILoggerFactory loggerFactory, bool store = true, bool faceted = false, bool taxonomyFaceted = false)
+            : base(fieldName, loggerFactory, store, faceted, taxonomyFaceted)
         {
 
         }
@@ -28,6 +28,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
                     if (content?.UrlSegment != null)
                     {
                         doc.Add(new StringField(FieldName, content.UrlSegment, Field.Store.NO));
+
+                        AddSingleFacetValue(doc, content.UrlSegment);
                     }
                 }
             }
