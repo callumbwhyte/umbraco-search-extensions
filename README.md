@@ -235,6 +235,26 @@ public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndex
 
 In this example, the same "locations" JSON object will include all cities while an entirely new "position" field will be created including all latitudes and longitudes.
 
+### Facets
+
+Facets & taxonomies are a powerful way to provide interactive filtering behaviour alongside a set of search results, and are supported natively since Examine v4.
+
+Fields must be [configured for faceting](https://shazwazza.github.io/Examine/articles/configuration.html#facets-configuration) to be indexed appropriately, and need to be explicitly [included in search queries](https://shazwazza.github.io/Examine/articles/searching.html#faceting) where faceted results are desired.
+
+Many of the Search Extensions field types include variants that support facets and taxonomies:
+
+| Field Type | Facets         | Taxonomy              |
+|------------|----------------|-----------------------|
+| `boolean`  | `facetBoolean` | ❌                    |
+| `json`     | `facetJson`    | ❌                    |
+| `list`     | `facetList`    | `facetTaxonomyList`   |
+| `picker`   | `facetPicker`  | `facetTaxonomyPicker` |
+| `udi`      | `facetUdi`     | `facetTaxonomyUdi`    |
+
+If an Examine search result supports facets it will be of type `IFacetResults`, which can be determined by casting (`results is IFacetResults`).
+
+There are a number of extensions upon `IFacetResults` to make interacting with the returned facets easier: `GetFacet<T>(string field)` returns all facet values for a given field, whilst `GetFacetCounts<T>(string field)` returns facet values alongside a count of how many times each term appeared in the index.
+
 ## Contribution guidelines
 
 To raise a new bug, create an issue on the GitHub repository. To fix a bug or add new features, fork the repository and send a pull request with your changes. Feel free to add ideas to the repository's issues list if you would to discuss anything related to the library.

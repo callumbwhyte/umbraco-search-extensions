@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [3.5.0]
+## [4.0.0] - 2026-02-27
+### Added
+* Support for facets with Examine v4 beta
+
+## [3.5.0] - 2026-02-27
 ### Added
 * `Boolean` value type for `__Published`, `__VariesByCulture`, and `umbracoNaviHide` fields
 
@@ -125,7 +129,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-4.0.0...HEAD
+[4.0.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-4.0.0
 [3.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.4.0...release-3.5.0
 [3.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.3.0...release-3.4.0
 [3.3.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.1...release-3.3.0
