@@ -18,7 +18,7 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
             var boolValue = ConvertValue(value);
 
-            doc.Add(new Int32Field(FieldName, boolValue ? 1 : 0, Store ? Field.Store.YES : Field.Store.NO));
+            doc.Add(new StringField(FieldName, boolValue ? "1" : "0", Store ? Field.Store.YES : Field.Store.NO));
         }
 
         public override Query GetQuery(string value)

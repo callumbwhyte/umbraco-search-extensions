@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.5.3] - 2026-03-10
+### Changed
+* Store `boolean` field values as string "1" or "0" for easier querying
+
 ## [3.5.2] - 2026-03-10
 ### Fixed
 * `IsPublished` for nested queries to align with boolean operations (fixed in [v3.5.1](#351))
@@ -133,8 +137,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.2...HEAD
-[3.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.1...release-3.5.2
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.3...HEAD
+[3.5.3]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.2...release-3.5.3
+[3.5.2]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.1...release-3.5.2
 [3.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-3.5.1
 [3.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.4.0...release-3.5.0
 [3.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.3.0...release-3.4.0
