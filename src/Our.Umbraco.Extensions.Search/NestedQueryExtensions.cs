@@ -27,7 +27,7 @@ namespace Our.Umbraco.Extensions.Search
         /// </summary>
         public static INestedBooleanOperation IsPublished(this INestedQuery query)
         {
-            return query.Field("__Published", "y");
+            return query.Field("__Published", "1");
         }
 
         /// <summary>
