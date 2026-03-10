@@ -4,16 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [4.0.0] - 2026-02-27
+## [4.0.0-beta.2] - 2026-03-10
+### Fixed
+* `IsPublished` check is always false since introduction of `boolean` field value type
+
+## [4.0.0-beta.1] - 2026-02-27
 ### Added
 * Support for facets with Examine v4 beta
 
+## [3.5.1] - 2026-03-10
+### Fixed
+* `IsPublished` check is always false since introduction of `boolean` field value type
+
 ## [3.5.0] - 2026-02-27
 ### Added
-* `Boolean` value type for `__Published`, `__VariesByCulture`, and `umbracoNaviHide` fields
+* `boolean` field value type for `__Published`, `__VariesByCulture`, and `umbracoNaviHide` fields
 
 ### Fixed
-* Exposing `store` option for all value types
+* Exposing `store` option for all field value types
 * Prevent JSON fields from including null values
 
 ## [3.4.0] - 2025-11-22
@@ -76,11 +84,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 ## [1.4.0] - 2021-02-22
 ### Added
-* `JSON` value type for indexing nested properties as unique fields
+* `JSON` field value type for indexing nested properties as unique fields
 * Support for indexing values through multiple field types with `MultipleValueTypeFactory`
 
 ### Changed
-* Field types no longer inherit `FullText` to control when values are committed to the index
+* Field value types no longer inherit `FullText` to control when values are committed to the index
 
 ### Fixed
 * UDI values are no longer being analyzed and stored in the index
@@ -88,7 +96,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ## [1.3.0] - 2021-02-10
 ### Added
 * Support for sanitizing, boosting, fuzzy and wildcard matches on arrays
-* Separator for `picker` and `UDI` value types is configurable
+* Separator for `picker` and `UDI` field types is configurable
 
 ### Changed
 * Renamed `SantizeSplit` method for getting an array of terms excluding stop words to `ToSafeArray`
@@ -129,8 +137,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-4.0.0...HEAD
-[4.0.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-4.0.0
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-4.0.0-beta.2...HEAD
+[4.0.0-beta.2]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-4.0.0-beta.1...release-4.0.0-beta.2
+[4.0.0-beta.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-4.0.0-beta.1
+[3.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-3.5.1
 [3.5.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.4.0...release-3.5.0
 [3.4.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.3.0...release-3.4.0
 [3.3.0]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.2.1...release-3.3.0
