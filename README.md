@@ -105,9 +105,9 @@ foreach (var result in query.Execute())
 
 ### Advanced fields
 
-Search Extensions introduces several new field types into Examine – `boolean`, `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
+Search Extensions introduces several new field value types into Examine – `boolean`, `json`, `list`, `UDI` and `picker` – to ensure Umbraco data is correctly indexed and queryable.
 
-Examine allows controlling an index's fields, field types, and [more](https://shazwazza.github.io/Examine/configuration#iconfigurenamedoptions), via [.NET's Named Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options):
+Examine allows controlling an index's fields and their value types, plus [much more](https://shazwazza.github.io/Examine/configuration#iconfigurenamedoptions), via [.NET's Named Options pattern](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration/options):
 
 ```
 public class ConfigureIndexOptions : IConfigureNamedOptions<LuceneDirectoryIndexOptions>
