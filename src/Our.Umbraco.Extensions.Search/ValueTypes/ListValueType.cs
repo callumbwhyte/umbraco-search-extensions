@@ -1,5 +1,8 @@
 ﻿using System;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Core;
 using Lucene.Net.Documents;
+using Lucene.Net.Util;
 using Microsoft.Extensions.Logging;
 
 namespace Our.Umbraco.Extensions.Search.ValueTypes
@@ -13,6 +16,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         }
 
         public string[] Separators { get; init; } = [",", "\r\n", "\n"];
+
+        public override Analyzer? Analyzer => new WhitespaceAnalyzer(LuceneVersion.LUCENE_48);
 
         protected override void AddSingleValue(Document doc, object value)
         {

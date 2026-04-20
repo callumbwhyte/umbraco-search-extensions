@@ -1,4 +1,6 @@
 ﻿using System;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Core;
 using Lucene.Net.Documents;
 using Microsoft.Extensions.Logging;
 using Our.Umbraco.Extensions.Search.Helpers;
@@ -12,6 +14,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
 
         }
+
+        public override Analyzer? Analyzer => new KeywordAnalyzer();
 
         protected override void AddSingleValue(Document doc, object value)
         {
