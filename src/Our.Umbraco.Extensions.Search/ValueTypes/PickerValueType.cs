@@ -1,4 +1,6 @@
 ﻿using System;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Core;
 using Lucene.Net.Documents;
 using Microsoft.Extensions.Logging;
 using Our.Umbraco.Extensions.Search.Composing;
@@ -15,6 +17,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         {
             _publishedContentHelper = ServiceLocator.GetInstance<PublishedContentHelper>();
         }
+
+        public override Analyzer? Analyzer => new KeywordAnalyzer();
 
         protected override void AddSingleValue(Document doc, object value)
         {

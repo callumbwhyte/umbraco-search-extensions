@@ -1,5 +1,7 @@
 ﻿using System;
 using Examine.Lucene.Indexing;
+using Lucene.Net.Analysis;
+using Lucene.Net.Analysis.Core;
 using Lucene.Net.Documents;
 using Microsoft.Extensions.Logging;
 using Umbraco.Cms.Core;
@@ -15,6 +17,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
         }
 
         public char Separator { get; }
+
+        public override Analyzer? Analyzer => new KeywordAnalyzer();
 
         protected override void AddSingleValue(Document doc, object value)
         {

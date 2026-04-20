@@ -28,12 +28,12 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 
         public Query GetQuery(bool? lower, bool? upper, bool lowerInclusive = true, bool upperInclusive = true)
         {
-            return GetQuery(lower == true ? 1 : 0, upper == true ? 1 : 0, lowerInclusive, upperInclusive);
+            return TermRangeQuery.NewStringRange(FieldName, lower == true ? "1" : "0", upper == true ? "1" : "0", lowerInclusive, upperInclusive);
         }
 
         public Query GetQuery(int? lower, int? upper, bool lowerInclusive = true, bool upperInclusive = true)
         {
-            return NumericRangeQuery.NewInt32Range(FieldName, lower, upper, lowerInclusive, upperInclusive);
+            return TermRangeQuery.NewStringRange(FieldName, lower == 1 ? "1" : "0", upper == 1 ? "1" : "0", lowerInclusive, upperInclusive);
         }
 
         private bool ConvertValue(object value)

@@ -17,6 +17,8 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
 
         public char Separator { get; }
 
+        public override Analyzer Analyzer => new WhitespaceSeparatorAnalyzer(LuceneInfo.CurrentVersion, Separator);
+
         protected override void AddSingleValue(Document doc, object value)
         {
             if (value is string stringValue)
@@ -24,7 +26,5 @@ namespace Our.Umbraco.Extensions.Search.ValueTypes
                 doc.Add(new TextField(FieldName, stringValue, Store ? Field.Store.YES : Field.Store.NO));
             }
         }
-
-        public override Analyzer Analyzer => new WhitespaceSeparatorAnalyzer(LuceneInfo.CurrentVersion, Separator);
     }
 }

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [3.5.4] - 2026-04-20
+### Fixed
+* Index `picker` and `udi` field value types with `KeywordAnalyzer` for exact matching scenarios
+* Ensure `boolean` field value type queries are strings "1" or "0" not a numeric range
+
 ## [3.5.3] - 2026-03-10
 ### Changed
 * Store `boolean` field values as string "1" or "0" for easier querying
@@ -137,7 +142,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Added
 * Initial release of Search Extensions for Umbraco 8.1
 
-[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.3...HEAD
+[Unreleased]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.4...HEAD
+[3.5.4]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.3...release-3.5.4
 [3.5.3]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.2...release-3.5.3
 [3.5.2]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.1...release-3.5.2
 [3.5.1]: https://github.com/callumbwhyte/umbraco-search-extensions/compare/release-3.5.0...release-3.5.1
